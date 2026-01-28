@@ -1,7 +1,7 @@
 interface ButtonInterface{
   className?:string,
   children : string
-  disabled? : string
+  disabled? : boolean
 }
 
 
