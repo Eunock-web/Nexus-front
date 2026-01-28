@@ -1,7 +1,9 @@
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import Button from "../../../components/Button"
 import useRegister from "../hooks/useRegister"
 import type { RegisterInput } from "../types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterSchema } from "../schemas/RegisterSchema";
 
 
 function RegisterForm(){
@@ -10,10 +12,10 @@ function RegisterForm(){
     const {mutate, isPending, error} = useRegister();
     
     //Usage de l'hook useForm pour la gestion du formulaire
-    const {register, handleSubmit} = useForm<RegisterInput>();
+    const {register, handleSubmit, formState: {errors}} = useForm<RegisterInput>({resolver: zodResolver(RegisterSchema)});
 
 
-    const onSubmit = (data : RegisterInput)=>{
+    const onSubmit: SubmitHandler<RegisterInput> = (data)=>{
         mutate(data);
     }
 
@@ -39,6 +41,11 @@ return <>
                         <p> Join the plateform for high-performance teams </p>
                     </div>
 
+                    {/** Affichage de l'erreur du mounted */}
+                    <div>
+                        {error && <span>{error.message}</span> }
+                    </div>
+
                     {/**Formulaire */}
                     <div>
                         <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
@@ -46,16 +53,19 @@ return <>
                             <div className="flex flex-col gap-2 ">
                                 <label htmlFor="firstname">FirstName</label>
                                 <input type="text" className="input border-0 " {...register("firstname")} />
+                                {errors.firstname && <span>{errors.firstname.message}</span> }
                             </div>
 
                             <div className="">
                                 <label htmlFor="lastname">LastName</label>
                                 <input type="text" {...register("lastname")} />
+                                {errors.lastname && <span>{errors.lastname.message}</span> }
                             </div>
 
                             <div className="">
                                 <label htmlFor="email">Email</label>
                                 <input type="email" {...register("email")} />
+                                {errors.email && <span>{errors.email.message}</span> }
                             </div>
 
                             <div className="">
@@ -64,6 +74,16 @@ return <>
                                     <input type="password" {...register("password")} />
 
                                 </div>
+                                {errors.password && <span>{errors.password.message}</span> }
+                            </div>
+
+                            <div className="">
+                                <label htmlFor="confirmPassword">Confirm Password</label>
+                                <div>
+                                    <input type="password" {...register("confirmPassword")} />
+
+                                </div>
+                                {errors.confirmPassword && <span>{errors.confirmPassword.message}</span> }
                             </div>
                             
                             <div>
