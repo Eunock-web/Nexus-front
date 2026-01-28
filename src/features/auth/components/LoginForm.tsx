@@ -1,14 +1,14 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import useLogin from "../hooks/useLogin"
 import type { LoginInterface } from "../types";
-import { LoginSchema } from "../schema/LoginSchema";
+import { LoginSchema, type LoginType } from "../schema/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
 function LoginForm(){
     const {mutate, isPending, isSuccess, data} = useLogin();
 
-    const {register, handleSubmit, formState : {errors}} = useForm<LoginInterface>({resolver : zodResolver(LoginSchema)});
+    const {register, handleSubmit, formState : {errors}} = useForm<LoginType>({resolver : zodResolver(LoginSchema)});
 
     const onSubmit: SubmitHandler<LoginInterface> = (data) =>{
         mutate(data);
@@ -32,7 +32,7 @@ function LoginForm(){
 
                 {/**Message apres success du login */}
                 <div>
-                    {isSuccess && data.response}
+                    {isSuccess && data.message}
                 </div>
 
                 {/**Header avant le formulaire */}
@@ -48,16 +48,18 @@ function LoginForm(){
                             <label htmlFor="email">Email address</label>
                             <div>
                                 <input type="email" id="email" { ...register("email")}/>
-                                {errors.email && <span>{errors.email.message}</span>}
+
                             </div>
+                                {errors.email && <span>{errors.email.message}</span>}
                         </div>
 
                         <div>
-                            <label htmlFor="password">Email address</label>
+                            <label htmlFor="password">Password</label>
                             <div>
                                 <input type="password" id="password" {...register("password")} />
 
                             </div>
+                            {errors.password && <span>{errors.password.message}</span>}
                         </div>
 
                         <div className="flex flex-col justify-between">

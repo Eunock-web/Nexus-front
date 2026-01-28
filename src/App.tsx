@@ -1,9 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import LoginForm from "./features/auth/components/LoginForm"
+
+
+const queryClient = new QueryClient();
 
 function App() {
 
   return (
     <>
-      <p className="flex justify-center items-center min-h-screen bg-black text-white"> Hello World !!! </p>
+      <QueryClientProvider client={queryClient}>
+        <LoginForm />
+      </QueryClientProvider>
     </>
   )
 }

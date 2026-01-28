@@ -1,8 +1,9 @@
-import axios from "axios"
-import type { LoginInterface } from "../types";
+import api from "./axios";
+import type { LoginInterface, LoginResponse } from "../types";
 
 
-export const  LoginApi = (data : LoginInterface) => {
-    return axios.post("https://nexus-back-cfd3.onrender.com/login",data).then((res)=>res.data);
+export const  LoginApi = async (data:LoginInterface):Promise<LoginResponse> =>{
+    const response = await api.post<LoginResponse>("/login", data);
+    return response.data;
 }
 
