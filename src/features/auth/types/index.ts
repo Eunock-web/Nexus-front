@@ -2,9 +2,8 @@
    export  interface User{
         id : number,
         email : string,
-        firstName : string,
-        lastName : string,
-        avatarUrl? : string,
+        firstname : string,
+        lastname : string,
         is2FAEnabled : boolean
     }
 
@@ -21,6 +20,5 @@
     firstname : string,
     lastname : string,
     password : string,
-    avatar : string
   }
 
