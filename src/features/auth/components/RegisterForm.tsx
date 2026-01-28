@@ -9,7 +9,7 @@ import { RegisterSchema } from "../schemas/RegisterSchema";
 function RegisterForm(){
 
     //Usage du useRegister pour l'envoie de la donnée
-    const {mutate, isPending, error} = useRegister();
+    const {mutate, isPending, error, data, isSuccess} = useRegister();
     
     //Usage de l'hook useForm pour la gestion du formulaire
     const {register, handleSubmit, formState: {errors}} = useForm<RegisterInput>({resolver: zodResolver(RegisterSchema)});
@@ -41,9 +41,17 @@ return <>
                         <p> Join the plateform for high-performance teams </p>
                     </div>
 
+                    <div>
+
+                    </div>
+
                     {/** Affichage de l'erreur du mounted */}
                     <div>
                         {error && <span>{error.message}</span> }
+                    </div>
+
+                    <div>
+                        {isSuccess && <span> {data.response}</span> }
                     </div>
 
                     {/**Formulaire */}
