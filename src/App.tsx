@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import RegisterForm from "./features/auth/components/RegisterForm";
-import LoginForm from "./features/auth/components/LoginForm"
+import { RouterProvider } from "react-router-dom";
+import appRouter from "./router/router";
 
 
 const queryClient = new QueryClient();
@@ -9,9 +9,8 @@ function App() {
 
   return (
     <>
-        <QueryClientProvider client={queryClient} >
-            <RegisterForm />
-            <LoginForm />
+      <QueryClientProvider client={queryClient} >
+        <RouterProvider router={appRouter} />
       </QueryClientProvider>
     </>
   )

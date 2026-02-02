@@ -26,8 +26,6 @@
   }
 
 
-
-
 //Interface AuthResponse 
    export interface LoginResponse{
         success : boolean
