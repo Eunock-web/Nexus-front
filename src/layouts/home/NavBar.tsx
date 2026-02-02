@@ -13,8 +13,8 @@ function NavBar(){
                     <h1 className="flex font-bold text-2xl text-white items-center ">Nexus</h1>
                 </div>
                 <div className="grid grid-cols-1">
-                    <Button className=" hidden sm:block bg-primary border-primary px-4 py-2 rounded-xl ">Login</Button>
-                    <Button className=" bg-primary border-primary px-4 py-2 rounded-xl " >Get Started</Button>
+                    <Button className=" hidden sm:block bg-primary border-primary px-4 py-2 rounded-xl text-white ">Login</Button>
+                    <Button className=" bg-primary border-primary px-4 py-2 rounded-xl text-white " >Get Started</Button>
                 </div>
             </div>
         </div>
