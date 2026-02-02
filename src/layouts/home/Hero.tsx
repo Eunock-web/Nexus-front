@@ -16,7 +16,7 @@ function Hero(){
             </div>
 
             <div className="flex flex-col items-center justify-center gap-5">
-                <Button className="h-14 border border-primary bg-primary flex flex-row gap-2 px-8 py-3 rounded-lg shadow-lg shadow-primary/50 transition-all  " >Start with free <span> <ArrowRight size={30} className="text-white" /> </span> </Button>
+                <Button className="h-14 border border-primary bg-primary flex flex-row gap-2 px-8 py-3 rounded-lg shadow-lg shadow-primary/50 transition-all  " >Start for free <span> <ArrowRight size={25} className="text-white" /> </span> </Button>
                 <Button className="border border-secondary bg-secondary flex flex-row gap-2 px-8 py-3 rounded-lg " >Book a demo </Button>
             </div>
 

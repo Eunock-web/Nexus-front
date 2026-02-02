@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 function NavBar(){
     return <>
         <div  >
-            <div className="flex flex-row justify-between items-center p-2 ">
+            <div className="flex flex-row justify-between items-center p-2 mb-10">
                 <div className="flex flex-row gap-2">
                     {/**AppLogo */}
                     <div>
