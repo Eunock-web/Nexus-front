@@ -1,4 +1,5 @@
 import CarousselPresentation from "../layouts/home/CarousselPresentation";
+import Footer from "../layouts/home/Footer";
 import Hero from "../layouts/home/Hero";
 import Main from "../layouts/home/Main";
 import PostFooter from "../layouts/home/PostFooter";
@@ -11,6 +12,7 @@ function Home(){
             <Main />
             <CarousselPresentation />
             <PostFooter />
+            <Footer />
         </div>
     </>
 }
