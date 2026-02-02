@@ -4,7 +4,7 @@ import NavBar from "../layouts/home/NavBar"
 
 function Layout(){
     return <>
-        <div className="p-2">
+        <div className="bg-[#0F172A]">
             <NavBar />
             <Outlet/>
             

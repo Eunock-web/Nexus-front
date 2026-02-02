@@ -1,9 +1,10 @@
+import Hero from "../layouts/home/Hero";
 
 
 function Home(){
     return <>
-        <div className="bg-dark">
-            
+        <div className="">
+            <Hero/>
         </div>
     </>
 }
