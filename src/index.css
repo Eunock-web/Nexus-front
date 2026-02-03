@@ -9,3 +9,11 @@
     --color-border-slate : #334155;
     --color-hover-indigo : #818CF8; 
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

@@ -8,7 +8,7 @@ interface CardInterface extends ButtonHTMLAttributes<HTMLButtonElement>{
 
 function MainCard({icon, title, description}: CardInterface){
     return <>
-        <div className="flex flex-col gap-3 border border-border-slate transition-all duration-300 rounded-2xl p-8 bg-dark">
+        <div className="flex flex-col gap-3 border border-border-slate transition-all duration-300 rounded-2xl md:w-[70%] p-8 bg-dark">
             <div className=" border border-primary/40 rounded-xl p-2 w-[13%] items-center justify-center flex">
                 {icon && <span className="text-primary/50" > {icon} </span>}
             </div>

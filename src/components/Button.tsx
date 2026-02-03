@@ -11,7 +11,7 @@ interface ButtonInterface extends ButtonHTMLAttributes<HTMLButtonElement> {
 function Button({className, children, icon} : ButtonInterface){
   return <>
     <div>
-      <button className={"btn justify-center items-center  text-lg font-bold  " + className} >
+      <button className={"btn justify-center items-center  text-lg font-bold hover:cursor-pointer " + className} >
         {icon && <span className="flex items-center">{icon}</span> }
         {children}
       </button>
