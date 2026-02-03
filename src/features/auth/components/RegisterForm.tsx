@@ -51,7 +51,8 @@ return <>
                     </div>
 
                     <div>
-                        {isSuccess && <span> {data.response}</span> }
+                        {isSuccess && <span> {data.response}</span> } 
+                        {isSuccess && <span> {data.otpResponse}</span> }
                     </div>
 
                     {/**Formulaire */}

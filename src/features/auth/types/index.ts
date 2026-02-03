@@ -12,6 +12,7 @@
    export interface AuthResponse{
         user : User,
         response : string,
+        otpResponse? : string,
         success : boolean
     }
 
