@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 
 function LoginForm(){
-    const {mutate, isPending, isSuccess, data} = useLogin();
+    const {mutate, isPending,error, isSuccess, data} = useLogin();
 
     const {register, handleSubmit, formState : {errors}} = useForm<LoginType>({resolver : zodResolver(LoginSchema)});
 
@@ -30,9 +30,13 @@ function LoginForm(){
                     <h1>Nexus</h1>
                 </div>
 
+                <div>
+                    {error && <span> {error.message} </span>}
+                </div>
+
                 {/**Message apres success du login */}
                 <div>
-                    {isSuccess && data.message}
+                    {isSuccess && <span> {data.response} </span>}
                 </div>
 
                 {/**Header avant le formulaire */}

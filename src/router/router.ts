@@ -4,6 +4,8 @@ import Layout from "../utils/Layout";
 import ErrorPage from "../utils/ErrorPage";
 import Home from "../pages/Home";
 import NotFound from "../utils/NotFound";
+import LoginForm from "../features/auth/components/LoginForm";
+import RegisterForm from "../features/auth/components/RegisterForm";
 
 
 const appRouter = createBrowserRouter([
@@ -17,7 +19,15 @@ const appRouter = createBrowserRouter([
                 element : React.createElement(Home)
             },
 
+            {
+                path : "/login",
+                element : React.createElement(LoginForm)
+            }, 
             
+            {
+                path : "/register",
+                element : React.createElement(RegisterForm)
+            }, 
 
             {
                 path : "*",

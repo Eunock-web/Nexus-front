@@ -6,8 +6,7 @@ import axios from "axios";
 function useRegister(){
   return useMutation<AuthResponse, Error, RegisterInput>({
         mutationFn: async (data: RegisterInput) => {
-          console.log("Donnée reçu", data);
-          const response = await axios.post('https://nexus-back-cfd3.onrender.com/register', data);
+          const response = await axios.post('https://nexus-back-cfd3.onrender.com/api/register', data);
           return response.data;
     },
 

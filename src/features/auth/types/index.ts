@@ -29,7 +29,7 @@
 //Interface AuthResponse 
    export interface LoginResponse{
         success : boolean
-        message? : string,
+        response? : string,
         accessToken : string,
         refreshToken : string
     }

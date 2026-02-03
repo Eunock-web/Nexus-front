@@ -1,10 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import Button from "../../components/Button";
-
+import { Link } from "react-router-dom";
 
 function Hero(){
     return <>
-        <div className="flex flex-col justify-center items-center gap-10">
+        <div className="flex flex-col justify-center items-center gap-10 mt-10">
             {/**Badge clignotant */}
             <div className="flex justify-center items-center  ">
                 <p className=" px-7 py-1.5 text-primary text-center bg-primary/20 rounded-full ">NEW: DARK MODE V2.0 IS OUT</p>
@@ -16,7 +16,7 @@ function Hero(){
             </div>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <Button className="h-14 border border-primary bg-primary flex flex-row gap-2 px-8 py-3 rounded-lg shadow-lg shadow-primary/50 transition-all text-white  " >Start for free <span> <ArrowRight size={25} className="text-white" /> </span> </Button>
+                <Button className="h-14 border border-primary bg-primary flex flex-row gap-2 px-8 py-3 rounded-lg shadow-lg shadow-primary/50 transition-all text-white  " > <Link to={"/login"}> Start for free  </Link> <span> <ArrowRight size={25} className="text-white" /> </span> </Button>
                 <Button className="border border-secondary bg-secondary  gap-2 px-8 py-3 rounded-lg text-white ml-4 " >Book a demo </Button>
             </div>
 
