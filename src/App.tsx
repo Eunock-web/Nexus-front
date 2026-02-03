@@ -1,9 +1,17 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { RouterProvider } from "react-router-dom";
+import appRouter from "./router/router";
+
+
+const queryClient = new QueryClient();
 
 function App() {
 
   return (
     <>
-      <p className="flex justify-center items-center min-h-screen bg-black text-white"> Hello World !!! </p>
+      <QueryClientProvider client={queryClient} >
+        <RouterProvider router={appRouter} />
+      </QueryClientProvider>
     </>
   )
 }
