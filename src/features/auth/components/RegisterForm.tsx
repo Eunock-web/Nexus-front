@@ -4,7 +4,7 @@ import useRegister from "../hooks/useRegister"
 import type { RegisterInput } from "../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "../schemas/RegisterSchema";
-import {  GithubIcon, Lock, Mail, User } from "lucide-react";
+import {  GithubIcon, Lock, Mail, User, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
@@ -23,19 +23,50 @@ function RegisterForm() {
     }
 
     return <>
-        <div className="">
+        <div className="flex min-h-screen">
             {/** Partie gauche du register visible sur desktop */}
-            <div className="hidden ">
+            <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-semiprimary text-white p-12 flex-col justify-between min-w-0 ">
+                        {/* Background Decoration - Repris de WorkspacePro */}
+                <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
+                    <svg fill="none" height="100%" viewBox="0 0 800 800" width="100%" xmlns="http://www.w3.org/2000/svg" className="animate-pulse-slow">
+                        <circle cx="400" cy="400" r="300" stroke="white" strokeDasharray="20 20" strokeWidth="2"></circle>
+                        <circle cx="400" cy="400" r="200" stroke="white" strokeWidth="4"></circle>
+                        <path d="M0 800L800 0" stroke="white" strokeWidth="1"></path>
+                        <path d="M100 800L800 100" stroke="white" strokeWidth="1"></path>
+                    </svg>
+                </div>
 
+                <div>
+                    {/**Logo + Appname */}
+                    <h1 className="text-5xl font-black"> Nexus </h1>
+                </div>
+
+                <div className="flex flex-col gap-4 relative z-10 max-w-[80%]">
+                    <h1 className="font-black text-6xl "> Experience real-time collaboration that scales with your ambition. </h1>
+                    <p className="font-medium mb-8 text-xl text-white/80 relative z-10 max-w-[70%]"> Built for high-performance teams. Join, 10,000+ organizations building the future.</p>
+                </div>
+
+                <div className="flex flex-row gap-3 border border-white/20 px-5 py-6 bg-white/20 rounded-xl relative z-10 max-w-[75%]">
+                    <div>
+                        <Zap className="bg-white/20 border-white/20 border p-2 rounded-full " size={60} fill="white" />
+                    </div>
+
+                    <div className="flex flex-col justify-center relative z-10 max-w-[80%]">
+                        <h1 className=" font-bold text-2xl "> Instance Sync </h1>
+                        <p className="text-2sm leading-relaxed font- text-white/80 ">Every change you  make is reflected instanctly across your entire teams's dashboard.</p>
+                    </div>
+                </div>
+
+                <p className="text-white/80 text-sm relative z-10 max-w-[80%]"> 2024 Nexus Inc. All rights reserved. </p>
             </div>
 
             {/**Partie droite du register */}
-            <div className="flex flex-col gap-4 mx-4">
+            <div className="flex flex-col gap-4 mx-4 lg:w-1/2 lg:px-50 lg:py-12">
                 {/**Logo */}
                 <div className="flex fleex-col justify-center items-center">
                     <h1 className="font-bold text-3xl"> Nexus </h1>
                 </div>
-
+ 
                 {/**Corps */}
                 <div className=" flex flex-col gap-2 ">
                     {/**Texte avant le formulaire */}
@@ -72,7 +103,7 @@ function RegisterForm() {
                                     <User className="text-gray-500 " size={25} />
                                     <input
                                         type="text"
-                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent  "
+                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent "
                                         placeholder="Enter your firstname" {...register("firstname")} 
                                         required
                                     />
@@ -160,12 +191,12 @@ function RegisterForm() {
 
                         {/**Boutton de l'OAuth2 */}
                         <div className="flex flex-row justify-between mb-7 ">
-                            <Button className="flex flex-row gap-2  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
+                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
                                 <FcGoogle size={30} />
                                 <span className="flex font-semibold text-lg items-center"> Google </span>
                             </Button>
 
-                            <Button className="flex flex-row gap-2  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
+                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
                                 <GithubIcon className="  text-black" size={30} />
                                 <span className="flex font-semibold text-lg items-center"> GitHub </span>
                             </Button>
