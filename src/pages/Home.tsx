@@ -7,8 +7,8 @@ import PostFooter from "../layouts/home/PostFooter";
 
 function Home(){
     return <>
-        <div className="px-3 flex flex-col gap-20">
-            <Hero/>
+        <div className="px-3 flex flex-col gap-20 bg-dark">
+            <Hero />
             <Main />
             <CarousselPresentation />
             <PostFooter />

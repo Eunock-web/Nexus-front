@@ -12,6 +12,7 @@
    export interface AuthResponse{
         user : User,
         response : string,
+        otpResponse? : string,
         success : boolean
     }
 
@@ -29,7 +30,7 @@
 //Interface AuthResponse 
    export interface LoginResponse{
         success : boolean
-        message? : string,
+        response? : string,
         accessToken : string,
         refreshToken : string
     }

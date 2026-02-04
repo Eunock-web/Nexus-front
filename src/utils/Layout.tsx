@@ -4,8 +4,8 @@ import NavBar from "../layouts/home/NavBar"
 
 function Layout(){
     return <>
-        <div className="bg-[#0F172A]">
-            <NavBar />
+        <div >
+            <NavBar  />
             <Outlet/>
             
         </div>
