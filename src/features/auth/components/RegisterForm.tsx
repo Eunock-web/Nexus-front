@@ -75,26 +75,24 @@ function RegisterForm() {
                         <p className="text-lg font text-gray-500 leading-relaxed"> Join the plateform for high-performance teams. </p>
                     </div>
 
-                    <div>
-
-                    </div>
 
                     {/** Affichage de l'erreur du mounted */}
                     <div>
-                        {error && <span>{error.message}</span>}
+                        {isSuccess && <span className="text-green-600 text-xl text-center"> {data.otpResponse}</span>}
                     </div>
 
                     <div>
-                        {isSuccess && <span> {data.otpResponse}</span>}
+                        {error && <span className="text-red-600 text-xl text-center">{error.message}</span>}
                     </div>
 
-                    <div>
-                        {isSuccess && <span> {data.response}</span>}
+
+                    <div className="flex ">
+                        {isSuccess && <span className="text-green-600 text-xl text-center justify-center items-center"> {data.response}</span>}
                     </div>
 
                     {/**Formulaire */}
                     <div className="">
-                        <form className="flex flex-col gap-5 lg:gap-3 lg:mt-[-20px]" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="flex flex-col gap-5 lg:gap-3 lg:-mt-5" onSubmit={handleSubmit(onSubmit)}>
 
                             <div className="flex flex-col gap-2 ">
                                 <label htmlFor="firstname" className="font-medium text-xl">FirstName</label>
