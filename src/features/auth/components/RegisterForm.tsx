@@ -1,7 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import Button from "../../../components/Button"
 import useRegister from "../hooks/useRegister"
-import type { RegisterInput } from "../types";
+import type { RegisterInput } from "../../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "../schemas/RegisterSchema";
 import {  GithubIcon, Lock, Mail, User, Zap } from "lucide-react";

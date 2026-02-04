@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import NotFound from "../utils/NotFound";
 import LoginForm from "../features/auth/components/LoginForm";
 import RegisterForm from "../features/auth/components/RegisterForm";
+import OtpCard from "../features/otp/components/OtpCard";
 
 
 const appRouter = createBrowserRouter([
@@ -27,7 +28,12 @@ const appRouter = createBrowserRouter([
             {
                 path : "/register",
                 element : React.createElement(RegisterForm)
-            }, 
+            },
+            
+            {
+                path : "/otp",
+                element : React.createElement(OtpCard)
+            },
 
             {
                 path : "*",

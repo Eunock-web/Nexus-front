@@ -1,5 +1,5 @@
-import api from "./axios";
-import type { LoginInterface, LoginResponse } from "../types";
+import api from "../../../api/axios";
+import type { LoginInterface, LoginResponse } from "../../../types";
 
 
 export const  LoginApi = async (data:LoginInterface):Promise<LoginResponse> =>{

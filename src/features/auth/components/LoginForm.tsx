@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import useLogin from "../hooks/useLogin"
-import type { LoginInterface } from "../types";
+import type { LoginInterface } from "../../../types";
 import { LoginSchema, type LoginType } from "../schemas/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GithubIcon, Lock, Mail, Zap } from "lucide-react";

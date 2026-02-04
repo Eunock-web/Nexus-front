@@ -40,3 +40,16 @@
         email : string,
         password : string
     }
+
+//interface pour le code otp
+    export interface OtpInterface{
+        email : string,
+        code : string
+    }
+
+//interface pour la reponse de l'otp
+    export interface OtpResponse{
+        success : boolean,
+        message : string,
+        error? : string
+    }
