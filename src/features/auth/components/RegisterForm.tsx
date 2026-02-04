@@ -4,7 +4,7 @@ import useRegister from "../hooks/useRegister"
 import type { RegisterInput } from "../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "../schemas/RegisterSchema";
-import { Github, Lock, Mail, User } from "lucide-react";
+import {  GithubIcon, Lock, Mail, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
@@ -160,18 +160,18 @@ function RegisterForm() {
 
                         {/**Boutton de l'OAuth2 */}
                         <div className="flex flex-row justify-between mb-7 ">
-                            <Button className="flex flex-row gap-2  px-7 py-2 border border-gray-400 rounded-xl" >
+                            <Button className="flex flex-row gap-2  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
                                 <FcGoogle size={30} />
                                 <span className="flex font-semibold text-lg items-center"> Google </span>
                             </Button>
 
-                            <Button className="flex flex-row gap-2  px-7 py-2 border border-gray-400 rounded-xl" >
-                                <Github className="  text-black" size={30} />
+                            <Button className="flex flex-row gap-2  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
+                                <GithubIcon className="  text-black" size={30} />
                                 <span className="flex font-semibold text-lg items-center"> GitHub </span>
                             </Button>
                         </div>
 
-                        <p className="text-center text-gray-500 leading-relaxed mb-7">Already have an account? <Link to={"/login"} className="text-semiprimary text-lg font-medium"> Login In </Link> </p>
+                        <p className="text-center text-gray-500 leading-relaxed mb-7">Already have an account? <Link to={"/login"} className="text-semiprimary text-lg font-medium hover:underline"> Login In </Link> </p>
                     </div>
                 </div>
             </div>
