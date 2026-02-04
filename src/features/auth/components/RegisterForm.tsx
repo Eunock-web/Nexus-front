@@ -4,6 +4,8 @@ import useRegister from "../hooks/useRegister"
 import type { RegisterInput } from "../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "../schemas/RegisterSchema";
+import { Lock, Mail, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 
 function RegisterForm(){
@@ -22,23 +24,23 @@ function RegisterForm(){
 return <>
         <div>
             {/** Partie gauche du register visible sur desktop */}
-            <div>
+            <div className="hidden ">
 
             </div>
 
             {/**Partie droite du register */}
-            <div>
+            <div className="flex flex-col gap-3">
                 {/**Logo */}
                 <div>
 
                 </div>
 
                 {/**Corps */}
-                <div>
+                <div className=" flex flex-col gap-2 ">
                     {/**Texte avant le formulaire */}
-                    <div>
-                        <h1> Create your account </h1>
-                        <p> Join the plateform for high-performance teams </p>
+                    <div className="flex flex-col gap-1">
+                        <h1 className="text-2xl font-bold "> Create your account </h1>
+                        <p className="text-lg font text-gray-500 leading-relaxed"> Join the plateform for high-performance teams. </p>
                     </div>
 
                     <div>
@@ -51,6 +53,10 @@ return <>
                     </div>
 
                     <div>
+                        {isSuccess && <span> {data.otpResponse}</span> }
+                    </div>
+
+                    <div>
                         {isSuccess && <span> {data.response}</span> }
                     </div>
 
@@ -59,37 +65,46 @@ return <>
                         <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
 
                             <div className="flex flex-col gap-2 ">
-                                <label htmlFor="firstname">FirstName</label>
-                                <input type="text" className="input border-0 " {...register("firstname")} />
+                                <label htmlFor="firstname" className="font-medium text-xl">FirstName</label>
+                                <div className="flex flex-row gap-2 border border-gray-400 p-4 rounded-lg ">
+                                    <User className="text-gray-500 " size={25} />
+                                    <input type="text" className="input  placeholder-gray-700 text-lg  " placeholder="Enter your firstname" {...register("firstname")} />    
+                                </div>
                                 {errors.firstname && <span>{errors.firstname.message}</span> }
                             </div>
 
-                            <div className="">
-                                <label htmlFor="lastname">LastName</label>
-                                <input type="text" {...register("lastname")} />
+                            <div className="flex flex-col gap-2 ">
+                                <label htmlFor="lastname" className="font-medium text-xl">LastName</label>
+                                <div className="flex flex-row gap-2 border border-gray-400 p-4 rounded-lg ">
+                                    <User className="text-gray-500 " size={25} />
+                                    <input type="text" className="input  placeholder-gray-700 text-lg  " placeholder="Enter your lastname" {...register("lastname")} />    
+                                </div>
                                 {errors.lastname && <span>{errors.lastname.message}</span> }
                             </div>
 
-                            <div className="">
-                                <label htmlFor="email">Email</label>
-                                <input type="email" {...register("email")} />
+                            <div className="flex flex-col gap-2 ">
+                                <label htmlFor="email" className="font-medium text-xl">Email</label>
+                                <div className="flex flex-row gap-2 border border-gray-400 p-4 rounded-lg ">
+                                    <Mail className="text-gray-500 " size={25} />
+                                    <input type="email" className="input  placeholder-gray-700 text-lg  " placeholder="Enter your Email" {...register("email")} />    
+                                </div>
                                 {errors.email && <span>{errors.email.message}</span> }
                             </div>
 
-                            <div className="">
-                                <label htmlFor="password">Password</label>
-                                <div>
-                                    <input type="password" {...register("password")} />
-
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="password" className="font-medium text-xl">Password</label>
+                                <div className="flex flex-row gap-2 border border-gray-400 p-4 rounded-lg ">
+                                    <Lock className="text-gray-500 " size={25} />
+                                    <input type="password" className="input  placeholder-gray-700 text-lg  " placeholder="Min 8 character" {...register("password")} />    
                                 </div>
                                 {errors.password && <span>{errors.password.message}</span> }
                             </div>
 
-                            <div className="">
-                                <label htmlFor="confirmPassword">Confirm Password</label>
-                                <div>
-                                    <input type="password" {...register("confirmPassword")} />
-
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="confirmPassword" className="font-medium text-xl">Confirm Password</label>
+                                <div className="flex flex-row gap-2 border border-gray-400 p-4 rounded-lg ">
+                                    <Lock className="text-gray-500 " size={25} />
+                                    <input type="password" className="input  placeholder-gray-700 text-lg  " placeholder="Min 8 character" {...register("confirmPassword")} />    
                                 </div>
                                 {errors.confirmPassword && <span>{errors.confirmPassword.message}</span> }
                             </div>
@@ -115,7 +130,7 @@ return <>
                             </div>
                         </div>
 
-                        <p>Already have an account? <span>Login</span></p>
+                        <p>Already have an account? <Link to={"/login"}> Login </Link> </p>
                     </div>
                 </div>
             </div>
