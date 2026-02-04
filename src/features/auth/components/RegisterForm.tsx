@@ -23,7 +23,7 @@ function RegisterForm() {
     }
 
     return <>
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen max-h-screen">
             {/** Partie gauche du register visible sur desktop */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-semiprimary text-white p-12 flex-col justify-between min-w-0 ">
                         {/* Background Decoration - Repris de WorkspacePro */}
@@ -61,7 +61,7 @@ function RegisterForm() {
             </div>
 
             {/**Partie droite du register */}
-            <div className="flex flex-col gap-4 mx-4 lg:w-1/2 lg:px-50 lg:py-12">
+            <div className="flex flex-col gap-4 mx-4 lg:w-1/2 lg:px-50 lg:py-8 lg:max-h-screen">
                 {/**Logo */}
                 <div className="flex fleex-col justify-center items-center">
                     <h1 className="font-bold text-3xl"> Nexus </h1>
@@ -70,7 +70,7 @@ function RegisterForm() {
                 {/**Corps */}
                 <div className=" flex flex-col gap-2 ">
                     {/**Texte avant le formulaire */}
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 ">
                         <h1 className="text-3xl font-bold "> Create your account </h1>
                         <p className="text-lg font text-gray-500 leading-relaxed"> Join the plateform for high-performance teams. </p>
                     </div>
@@ -94,7 +94,7 @@ function RegisterForm() {
 
                     {/**Formulaire */}
                     <div className="">
-                        <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="flex flex-col gap-5 lg:gap-3 lg:mt-[-20px]" onSubmit={handleSubmit(onSubmit)}>
 
                             <div className="flex flex-col gap-2 ">
                                 <label htmlFor="firstname" className="font-medium text-xl">FirstName</label>
@@ -183,14 +183,14 @@ function RegisterForm() {
                             </div>
 
                             <div className="">
-                                <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mb-7" disabled={isPending}>{isPending ? 'Envoi en cours' : 'Create Acount'}</Button>
+                                <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mb-5" disabled={isPending}>{isPending ? 'Envoi en cours' : 'Create Acount'}</Button>
                             </div>
                         </form>
 
-                        <p className="text-gray-500 text-sm text-center mb-7"> Or Continue with  </p>
+                        <p className="text-gray-500 text-sm text-center mb-5"> Or Continue with  </p>
 
                         {/**Boutton de l'OAuth2 */}
-                        <div className="flex flex-row justify-between mb-7 ">
+                        <div className="flex flex-row justify-between mb-5 ">
                             <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
                                 <FcGoogle size={30} />
                                 <span className="flex font-semibold text-lg items-center"> Google </span>
