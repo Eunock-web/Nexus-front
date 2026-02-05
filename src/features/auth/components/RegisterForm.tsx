@@ -8,6 +8,7 @@ import { GithubIcon, Lock, Mail, User, Zap } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../../hooks/useAuth";
+import { delay } from "../../../api/delay";
 
 
 function RegisterForm() {
@@ -25,6 +26,7 @@ function RegisterForm() {
         mutate(data, {
             onSuccess: () => {
                 setTempEmail(data.email);
+                 delay(2000);
                 navigate("/otp");
             }
         });
