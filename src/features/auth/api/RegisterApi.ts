@@ -1,5 +1,5 @@
-import api from "./axios";
-import type { AuthResponse, RegisterInput } from "../types";
+import api from "../../../api/axios";
+import type { AuthResponse, RegisterInput } from "../../../types";
 
 
 export const  RegisterApi = async (data:RegisterInput):Promise<AuthResponse> =>{
