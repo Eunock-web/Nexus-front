@@ -6,7 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { GithubIcon, Lock, Mail, Zap } from "lucide-react";
 import Button from "../../../components/Button";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 function LoginForm() {
     const { mutate, isPending, error, isSuccess, data } = useLogin();
@@ -14,9 +15,17 @@ function LoginForm() {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginType>({ 
         resolver: zodResolver(LoginSchema) 
     });
+    const navigate = useNavigate();
+    const {saveSession} = useAuth();
 
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
-        mutate(data);
+        mutate(data, {
+            onSuccess : (data)=>{
+                saveSession(data.accessToken, data.user);
+                navigate("/dashboard");
+            }
+        }
+        );
     }
 
     return (

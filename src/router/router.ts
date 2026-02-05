@@ -7,9 +7,11 @@ import NotFound from "../utils/NotFound";
 import LoginForm from "../features/auth/components/LoginForm";
 import RegisterForm from "../features/auth/components/RegisterForm";
 import OtpCard from "../features/otp/components/OtpCard";
+import Dashboard from "../pages/Dashboard";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 
-const appRouter = createBrowserRouter([
+ const appRouter = createBrowserRouter([
     {
         path : "/",
         element : React.createElement(Layout),
@@ -28,6 +30,11 @@ const appRouter = createBrowserRouter([
             {
                 path : "/register",
                 element : React.createElement(RegisterForm)
+            },
+
+            {
+                path : "/dashboard",
+                element : React.createElement(ProtectedRoute, null, React.createElement(Dashboard))
             },
             
             {

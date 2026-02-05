@@ -4,29 +4,37 @@ import useRegister from "../hooks/useRegister"
 import type { RegisterInput } from "../../../types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "../schemas/RegisterSchema";
-import {  GithubIcon, Lock, Mail, User, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import { GithubIcon, Lock, Mail, User, Zap } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { useAuth } from "../../../hooks/useAuth";
 
 
 function RegisterForm() {
 
+    //Usage de l'hook useForm pour la gestion du formulaire
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(RegisterSchema) });
+    const { setTempEmail } = useAuth();
+    const navigate = useNavigate();
+
     //Usage du useRegister pour l'envoie de la donnée
     const { mutate, isPending, error, data, isSuccess } = useRegister();
 
-    //Usage de l'hook useForm pour la gestion du formulaire
-    const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(RegisterSchema) });
-
 
     const onSubmit: SubmitHandler<RegisterInput> = (data) => {
-        mutate(data);
+        mutate(data, {
+            onSuccess: () => {
+                setTempEmail(data.email);
+                navigate("/otp");
+            }
+        });
     }
 
     return <>
         <div className="flex min-h-screen max-h-screen">
             {/** Partie gauche du register visible sur desktop */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-semiprimary text-white p-12 flex-col justify-between min-w-0 ">
-                        {/* Background Decoration - Repris de WorkspacePro */}
+                {/* Background Decoration - Repris de WorkspacePro */}
                 <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
                     <svg fill="none" height="100%" viewBox="0 0 800 800" width="100%" xmlns="http://www.w3.org/2000/svg" className="animate-pulse-slow">
                         <circle cx="400" cy="400" r="300" stroke="white" strokeDasharray="20 20" strokeWidth="2"></circle>
@@ -66,7 +74,7 @@ function RegisterForm() {
                 <div className="flex fleex-col justify-center items-center">
                     <h1 className="font-bold text-3xl"> Nexus </h1>
                 </div>
- 
+
                 {/**Corps */}
                 <div className=" flex flex-col gap-2 ">
                     {/**Texte avant le formulaire */}
@@ -102,7 +110,7 @@ function RegisterForm() {
                                     <input
                                         type="text"
                                         className="input  placeholder-gray-700 text-lg outline-0 bg-transparent "
-                                        placeholder="Enter your firstname" {...register("firstname")} 
+                                        placeholder="Enter your firstname" {...register("firstname")}
                                         required
                                     />
                                 </div>
@@ -115,12 +123,12 @@ function RegisterForm() {
 
                                 <div className="flex flex-row gap-2 border border-gray-400 p-3 rounded-lg transition-all focus-within:ring-2 focus-within:ring-primary focus-within:border-primary ">
                                     <User className="text-gray-500 " size={25} />
-                                    <input 
-                                    type="text" 
-                                    className="input  placeholder-gray-700 text-lg outline-0 bg-transparent" 
-                                    placeholder="Enter your lastname" {...register("lastname")}
-                                    required  
-                                />
+                                    <input
+                                        type="text"
+                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent"
+                                        placeholder="Enter your lastname" {...register("lastname")}
+                                        required
+                                    />
                                 </div>
 
                                 {errors.lastname && <span className="text-red-500">{errors.lastname.message}</span>}
@@ -130,11 +138,11 @@ function RegisterForm() {
                                 <label htmlFor="email" className="font-medium text-xl">Email</label>
 
                                 <div className="flex flex-row gap-2 border border-gray-400 p-3 rounded-lg transition-all focus-within:ring-2 focus-within:ring-primary focus-within:border-primary ">
-                                    
+
                                     <Mail className="text-gray-500 " size={25} />
-                                    <input 
-                                        type="email" 
-                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent  " 
+                                    <input
+                                        type="email"
+                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent  "
                                         placeholder="Enter your Email" {...register("email")}
                                         required
                                     />
@@ -148,9 +156,9 @@ function RegisterForm() {
 
                                 <div className="flex flex-row gap-2 border border-gray-400 p-3 rounded-lg transition-all focus-within:ring-2 focus-within:ring-primary focus-within:border-primary ">
                                     <Lock className="text-gray-500 " size={25} />
-                                    <input 
-                                        type="password" 
-                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent  " 
+                                    <input
+                                        type="password"
+                                        className="input  placeholder-gray-700 text-lg outline-0 bg-transparent  "
                                         placeholder="Min 8 character" {...register("password")}
                                         required
                                     />
@@ -164,9 +172,9 @@ function RegisterForm() {
 
                                 <div className="flex flex-row gap-2 border border-gray-400 p-3 rounded-lg transition-all focus-within:ring-2 focus-within:ring-primary focus-within:border-primary ">
                                     <Lock className="text-gray-500 " size={25} />
-                                    <input 
-                                        type="password" 
-                                        className="input  placeholder-gray-700 text-lg focus:ring-0 outline-0 bg-transparent  " 
+                                    <input
+                                        type="password"
+                                        className="input  placeholder-gray-700 text-lg focus:ring-0 outline-0 bg-transparent  "
                                         placeholder="Min 8 character" {...register("confirmPassword")}
                                         required
                                     />
