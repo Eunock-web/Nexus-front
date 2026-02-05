@@ -26,7 +26,7 @@ function RegisterForm() {
         mutate(data, {
             onSuccess: () => {
                 setTempEmail(data.email);
-                 delay(2000);
+                delay(9000);
                 navigate("/otp");
             }
         });

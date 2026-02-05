@@ -9,6 +9,7 @@ import RegisterForm from "../features/auth/components/RegisterForm";
 import OtpCard from "../features/otp/components/OtpCard";
 import Dashboard from "../pages/Dashboard";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import { OtpGuard } from "../features/otp/api/OtpGuard";
 
 
  const appRouter = createBrowserRouter([
@@ -39,7 +40,7 @@ import { ProtectedRoute } from "../components/ProtectedRoute";
             
             {
                 path : "/otp",
-                element : React.createElement(OtpCard)
+                element : React.createElement(OtpGuard, null, React.createElement(OtpCard))
             },
 
             {
