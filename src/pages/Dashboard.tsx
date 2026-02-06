@@ -1,14 +1,19 @@
-import { useAuth } from "../hooks/useAuth"
+import Footer from "../layouts/Launcher/Footer";
+import LaunchMain from "../layouts/Launcher/Main";
+import NavBar from "../layouts/Launcher/NavBar";
 
 
 
 function Dashboard(){
-    const {user} = useAuth();
     return <>
-            <div>
-                <h1> Hello {user?.email} </h1>
-            </div>
-        </>
+        <div className="">
+            <NavBar />   
+            <div className="border-b border-b-gray-300"></div> 
+            <LaunchMain />
+            <div className="border-b border-b-gray-300"></div> 
+            <Footer />
+        </div>        
+    </>
 }
 
 export default Dashboard
