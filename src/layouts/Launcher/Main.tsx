@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react"
 import Button from "../../components/Button"
+import { Link } from "react-router-dom"
 
 
 function LaunchMain(){
@@ -13,7 +14,7 @@ function LaunchMain(){
                 </div>
 
                 <div className="flex flex-row gap-2 justify-center items-center ">
-                    <Button className="flex text-center text-white text-lg  bg-primary p-3 gap-2 rounded-xl items-center "> Créer mon espace de travail <span> <ArrowRight className="" size={20} /> </span> </Button>
+                    <Button className="flex text-center text-white text-lg  bg-primary p-3 gap-2 rounded-xl items-center "> <Link to={"/workspaceCreate"}>Créer mon espace de travail</Link> <span> <ArrowRight className="" size={20} /> </span> </Button>
                 </div>
             </div>
 

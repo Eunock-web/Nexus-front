@@ -10,6 +10,7 @@ import OtpCard from "../features/otp/components/OtpCard";
 import Dashboard from "../pages/Dashboard";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { OtpGuard } from "../features/otp/api/OtpGuard";
+import WorkSpace from "../features/workspace/components/WorkSpace";
 
 
  const appRouter = createBrowserRouter([
@@ -41,6 +42,11 @@ import { OtpGuard } from "../features/otp/api/OtpGuard";
             {
                 path : "/otp",
                 element : React.createElement(OtpGuard, null, React.createElement(OtpCard))
+            },
+
+            {
+                path : "/workspaceCreate",
+                element : React.createElement(ProtectedRoute, null, React.createElement(WorkSpace))
             },
 
             {
