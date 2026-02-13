@@ -67,3 +67,25 @@
     }
 
 
+//interface du retour de la modification de mot de passe
+    export interface ForgotInterface{
+        email : string
+    }
+
+//Interface pour son retour
+    export interface ForgotResponse{
+        success : boolean,
+        response? : string
+    }
+
+//interface pour la validation du lient de modification de mot de passe
+    export interface ResetInterface{
+        token : string
+    }
+
+//interface pour le retur de l'utilisateur 
+    export interface ResetResponse{
+        success : boolean
+        response : string
+        email? : string
+    }

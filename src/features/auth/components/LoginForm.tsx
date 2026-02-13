@@ -123,7 +123,7 @@ function LoginForm() {
                                 <input type="checkbox" id="checkbox" className="h-4 w-4" />
                                 <label htmlFor="checkbox" className="text-gray-600"> Remember me</label>
                             </div>
-                            <span className="text-semiprimary font-medium cursor-pointer hover:underline">Forgot Password?</span>
+                            <span className="text-semiprimary font-medium cursor-pointer hover:underline"><Link to="/forgot-password">Forgot Password?</Link></span>
                         </div>
 
                         <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mt-2" disabled={isPending}>
@@ -152,6 +152,8 @@ function LoginForm() {
                             Start your 14-day free trial
                         </Link>
                     </p>
+
+                    <p className="text-center text-gray-500 leading-relaxed mt-5"> <Link to="/verify-account" className="text-semiprimary text-lg font-medium hover:underline ml-1"> Verify account </Link> </p>
                 </div>
             </div>
         </div>

@@ -10,6 +10,9 @@ import OtpCard from "../features/otp/components/OtpCard";
 import Dashboard from "../pages/Dashboard";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { OtpGuard } from "../features/otp/api/OtpGuard";
+import ForgotPassword from "../features/auth/components/ForgotPassword";
+import UpdatePassword from "../features/auth/components/UpdatePassword";
+import ValidateEmail from "../features/auth/components/ValidateEmail";
 
 
  const appRouter = createBrowserRouter([
@@ -41,6 +44,26 @@ import { OtpGuard } from "../features/otp/api/OtpGuard";
             {
                 path : "/otp",
                 element : React.createElement(OtpGuard, null, React.createElement(OtpCard))
+            },
+
+            {
+                path : "/verify-account",
+                element : React.createElement(OtpGuard, null, React.createElement(OtpCard))
+            },
+
+            {
+                path : "/forgot-password",
+                element : React.createElement(ForgotPassword)
+            },
+
+             {
+                path : "/reset-password/:token",
+                element : React.createElement(ValidateEmail)
+            },
+
+            {
+                path : "/updatePassword",
+                element : React.createElement(UpdatePassword)
             },
 
             {
