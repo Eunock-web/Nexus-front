@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../../hooks/useAuth";
 import useGoogle from "../hooks/useGoogle";
+import useGithub from "../hooks/useGithub";
 
 
 function RegisterForm() {
@@ -21,7 +22,8 @@ function RegisterForm() {
     //Usage du useRegister pour l'envoie de la donnée
     const { mutate: mutateRegister, isPending: isRegisterPending, error, data, isSuccess } = useRegister();
 
-    const { login } = useGoogle();
+    const { login: googleLogin } = useGoogle();
+    const { login: githubLogin } = useGithub();
 
     const onSubmit: SubmitHandler<RegisterInput> = (data) => {
         mutateRegister(data, {
@@ -199,12 +201,12 @@ function RegisterForm() {
 
                         {/**Boutton de l'OAuth2 */}
                         <div className="flex flex-row justify-between mb-5 ">
-                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => login()} >
+                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => googleLogin()} >
                                 <FcGoogle size={30} />
                                 <span className="flex font-semibold text-lg items-center"> Google </span>
                             </Button>
 
-                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white" >
+                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white" onClick={() => githubLogin()} >
                                 <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
                                 <span className="flex font-semibold text-lg items-center "> GitHub </span>
                             </Button>

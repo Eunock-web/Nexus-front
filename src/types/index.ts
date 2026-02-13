@@ -114,3 +114,17 @@ export interface GoogleResponse {
 export interface GoogleRedirectResponse {
     url: string
 }
+
+//interface de retour de github OAuth
+export interface GithubResponse {
+    success?: boolean
+    message?: string
+    accessToken?: string
+    refreshToken?: string
+    user?: User
+}
+
+//interface de retour de github OAuth
+export interface GithubRedirectResponse {
+    url: string
+}

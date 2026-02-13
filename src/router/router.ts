@@ -69,7 +69,7 @@ const appRouter = createBrowserRouter([
 
 
             {
-                path: "/auth/google/callback",
+                path: "api/Oauth/google/callback",
                 element: React.createElement(GoogleResponse)
             },
 

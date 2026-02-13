@@ -1,6 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import useLogin from "../hooks/useLogin"
 import useGoogle from "../hooks/useGoogle";
+import useGithub from "../hooks/useGithub";
 import type { LoginInterface } from "../../../types";
 import { LoginSchema, type LoginType } from "../schemas/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +14,7 @@ import { useAuth } from "../../../hooks/useAuth";
 function LoginForm() {
     const { mutate, isPending, error, isSuccess, data } = useLogin();
     const { login: googleLogin } = useGoogle();
+    const { login: githubLogin } = useGithub();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginType>({
         resolver: zodResolver(LoginSchema)
@@ -23,8 +25,10 @@ function LoginForm() {
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         mutate(data, {
             onSuccess: (data) => {
-                saveSession(data.accessToken, data.user);
-                setTimeout(() => navigate("/dashboard"), 3000);
+                if (data.user) {
+                    saveSession(data.accessToken, data.user);
+                    setTimeout(() => navigate("/dashboard"), 3000);
+                }
             }
         }
         );
@@ -142,7 +146,7 @@ function LoginForm() {
                             <span className="flex font-semibold text-lg items-center"> Google </span>
                         </Button>
 
-                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " >
+                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => githubLogin()} >
                             <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
                             <span className="flex font-semibold text-lg items-center"> GitHub </span>
                         </Button>
