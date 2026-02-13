@@ -101,3 +101,16 @@ export interface UpdateResponse {
     success: boolean,
     response: string
 }
+
+//interface de retour de google OAuth
+export interface GoogleResponse {
+    success?: boolean
+    message?: string
+    accessToken?: string
+    refreshToken?: string
+    user?: User
+}
+
+export interface GoogleRedirectResponse {
+    url: string
+}

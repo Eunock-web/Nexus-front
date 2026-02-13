@@ -8,6 +8,7 @@ import { GithubIcon, Lock, Mail, User, Zap } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../../hooks/useAuth";
+import useGoogle from "../hooks/useGoogle";
 
 
 function RegisterForm() {
@@ -18,11 +19,12 @@ function RegisterForm() {
     const navigate = useNavigate();
 
     //Usage du useRegister pour l'envoie de la donnée
-    const { mutate, isPending, error, data, isSuccess } = useRegister();
+    const { mutate: mutateRegister, isPending: isRegisterPending, error, data, isSuccess } = useRegister();
 
+    const { login } = useGoogle();
 
     const onSubmit: SubmitHandler<RegisterInput> = (data) => {
-        mutate(data, {
+        mutateRegister(data, {
             onSuccess: () => {
                 setTempEmail(data.email);
                 setTimeout(() => navigate("/otp"), 3000)
@@ -189,7 +191,7 @@ function RegisterForm() {
                             </div>
 
                             <div className="">
-                                <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mb-5" disabled={isPending}>{isPending ? 'Envoi en cours' : 'Create Acount'}</Button>
+                                <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mb-5" disabled={isRegisterPending}>{isRegisterPending ? 'Envoi en cours' : 'Create Acount'}</Button>
                             </div>
                         </form>
 
@@ -197,14 +199,14 @@ function RegisterForm() {
 
                         {/**Boutton de l'OAuth2 */}
                         <div className="flex flex-row justify-between mb-5 ">
-                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
+                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => login()} >
                                 <FcGoogle size={30} />
                                 <span className="flex font-semibold text-lg items-center"> Google </span>
                             </Button>
 
-                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
-                                <GithubIcon className="  text-black" size={30} />
-                                <span className="flex font-semibold text-lg items-center"> GitHub </span>
+                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white" >
+                                <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
+                                <span className="flex font-semibold text-lg items-center "> GitHub </span>
                             </Button>
                         </div>
 

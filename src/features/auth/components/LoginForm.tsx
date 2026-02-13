@@ -1,5 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import useLogin from "../hooks/useLogin"
+import useGoogle from "../hooks/useGoogle";
 import type { LoginInterface } from "../../../types";
 import { LoginSchema, type LoginType } from "../schemas/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,16 +12,17 @@ import { useAuth } from "../../../hooks/useAuth";
 
 function LoginForm() {
     const { mutate, isPending, error, isSuccess, data } = useLogin();
+    const { login: googleLogin } = useGoogle();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginType>({ 
-        resolver: zodResolver(LoginSchema) 
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginType>({
+        resolver: zodResolver(LoginSchema)
     });
     const navigate = useNavigate();
-    const {saveSession} = useAuth();
-4
+    const { saveSession } = useAuth();
+    4
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         mutate(data, {
-            onSuccess : (data)=>{
+            onSuccess: (data) => {
                 saveSession(data.accessToken, data.user);
                 setTimeout(() => navigate("/dashboard"), 3000);
             }
@@ -74,8 +76,8 @@ function LoginForm() {
                 {/** Header du formulaire */}
                 <div className="flex flex-col gap-1 lg:items-start items-center">
                     <h1 className="text-4xl font-bold "> Welcome back </h1>
-                    <p className="text-lg text-gray-500 leading-relaxed text-center lg:text-left"> 
-                        Enter your credentials to access your workspace 
+                    <p className="text-lg text-gray-500 leading-relaxed text-center lg:text-left">
+                        Enter your credentials to access your workspace
                     </p>
                 </div>
 
@@ -92,10 +94,10 @@ function LoginForm() {
                             <label htmlFor="email" className="font-medium text-xl">Email</label>
                             <div className="flex flex-row gap-2 border border-gray-400 p-3 rounded-lg transition-all focus-within:ring-2 focus-within:ring-primary focus-within:border-primary">
                                 <Mail className="text-gray-500" size={25} />
-                                <input 
-                                    type="email" 
-                                    className="w-full placeholder-gray-700 text-lg outline-0 bg-transparent" 
-                                    placeholder="Enter your Email" 
+                                <input
+                                    type="email"
+                                    className="w-full placeholder-gray-700 text-lg outline-0 bg-transparent"
+                                    placeholder="Enter your Email"
                                     {...register("email")}
                                     required
                                 />
@@ -107,10 +109,10 @@ function LoginForm() {
                             <label htmlFor="password" className="font-medium text-xl">Password</label>
                             <div className="flex flex-row gap-2 border border-gray-400 p-3 rounded-lg transition-all focus-within:ring-2 focus-within:ring-primary focus-within:border-primary">
                                 <Lock className="text-gray-500" size={25} />
-                                <input 
-                                    type="password" 
-                                    className="w-full placeholder-gray-700 text-lg outline-0 bg-transparent" 
-                                    placeholder="Enter your password" 
+                                <input
+                                    type="password"
+                                    className="w-full placeholder-gray-700 text-lg outline-0 bg-transparent"
+                                    placeholder="Enter your password"
                                     {...register("password")}
                                     required
                                 />
@@ -135,19 +137,19 @@ function LoginForm() {
 
                     {/** OAuth2 Buttons */}
                     <div className="flex flex-row justify-between mb-8">
-                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
-                                <FcGoogle size={30} />
-                                <span className="flex font-semibold text-lg items-center"> Google </span>
-                            </Button>
+                        <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => googleLogin()}>
+                            <FcGoogle size={30} />
+                            <span className="flex font-semibold text-lg items-center"> Google </span>
+                        </Button>
 
-                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors" >
-                                <GithubIcon className="  text-black" size={30} />
-                                <span className="flex font-semibold text-lg items-center"> GitHub </span>
-                            </Button>
+                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " >
+                            <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
+                            <span className="flex font-semibold text-lg items-center"> GitHub </span>
+                        </Button>
                     </div>
 
                     <p className="text-center text-gray-500 leading-relaxed">
-                        Don't have an account? 
+                        Don't have an account?
                         <Link to="/register" className="text-semiprimary text-lg font-medium hover:underline ml-1">
                             Start your 14-day free trial
                         </Link>
