@@ -3,11 +3,9 @@ import { ForgotPasswordSchema, type ForgotPasswordType } from "../schemas/Forgot
 import { zodResolver } from "@hookform/resolvers/zod";
 import useForgot from "../hooks/useForgot";
 import { useAuth } from "../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
     const {setTempEmail} = useAuth();
-    const navigate = useNavigate();
 
     const {register, formState : {errors}, handleSubmit,  } = useForm<ForgotPasswordType>(
         {resolver : zodResolver(ForgotPasswordSchema)}

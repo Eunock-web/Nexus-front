@@ -22,7 +22,7 @@ function LoginForm() {
         mutate(data, {
             onSuccess : (data)=>{
                 saveSession(data.accessToken, data.user);
-                navigate("/dashboard");
+                setTimeout(() => navigate("/dashboard"), 3000);
             }
         }
         );
