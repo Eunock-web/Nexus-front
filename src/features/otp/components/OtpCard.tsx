@@ -76,7 +76,7 @@ function OtpCard() {
                                     key={index}
                                     type="text"
                                     maxLength={1}
-                                    className="w-10 p-4 border rounded-xl focus:outline-0 focus:border-primary focus:border-2 text-center"
+                                    className="w-10 p-4 border rounded-xl focus:outline-0 focus:border-primary focus:border-2 text-center md:w-12 md:p-5"
                                     value={data}
                                     onChange={e => handleChange(e.target, index)}
                                     onKeyDown={e => handleKeyDown(e, index)}
