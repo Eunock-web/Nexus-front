@@ -18,10 +18,8 @@ function useGoogleResponse() {
         mutationFn: GoogleApiResponse,
         onSuccess: (data) => {
             console.log("Données reçues de Google API:", data);
-            // On vérifie accessToken, si user manque on peut quand même tenter de naviguer 
-            // ou afficher un warning, mais l'absence de user bloquait tout.
             if (data.accessToken) {
-                saveSession(data.accessToken, data.user as any); // cast temporaire si user manque
+                saveSession(data.accessToken, data.user as any); 
                 navigate('/dashboard');
             }
         },

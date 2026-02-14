@@ -14,6 +14,7 @@ import ForgotPassword from "../features/auth/components/ForgotPassword";
 import UpdatePassword from "../features/auth/components/UpdatePassword";
 import ValidateEmail from "../features/auth/components/ValidateEmail";
 import GoogleResponse from "../features/auth/components/GoogleResponse";
+import GithubResponse from "../features/auth/components/GithubResponse";
 
 
 const appRouter = createBrowserRouter([
@@ -71,6 +72,11 @@ const appRouter = createBrowserRouter([
             {
                 path: "api/Oauth/google/callback",
                 element: React.createElement(GoogleResponse)
+            },
+
+            {
+                path: "api/Oauth/github/callback",
+                element: React.createElement(GithubResponse)
             },
 
             {
