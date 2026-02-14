@@ -24,7 +24,7 @@ function GoogleResponse() {
                         </svg>
                     </div>
                     <h2 className="text-xl font-semibold text-gray-800">Échec de l'authentification</h2>
-                    <p className="text-gray-500">Une erreur est survenue lors de la connexion avec Google.</p>
+                    <p className="text-gray-500">Une erreur est survenue lors de la connexion de Nexus.</p>
                     <a href="/login" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                         Retour à la connexion
                     </a>
