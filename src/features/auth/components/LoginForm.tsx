@@ -49,7 +49,11 @@ function LoginForm() {
                 </div>
 
                 <div className="relative z-10">
-                    <h1 className="text-5xl font-black"> Nexus </h1>
+                    <h1 className="text-5xl font-black"> 
+                        <Link to={"/"}>
+                            Nexus
+                        </Link>    
+                     </h1>
                 </div>
 
                 <div className="flex flex-col gap-4 relative z-10 max-w-[80%]">
@@ -79,7 +83,7 @@ function LoginForm() {
 
                 {/** Header du formulaire */}
                 <div className="flex flex-col gap-1 lg:items-start items-center">
-                    <h1 className="text-4xl font-bold "> Welcome back </h1>
+                    <h1 className="text-4xl font-bold  "> Welcome back </h1>
                     <p className="text-lg text-gray-500 leading-relaxed text-center lg:text-left">
                         Enter your credentials to access your workspace
                     </p>
@@ -126,7 +130,7 @@ function LoginForm() {
 
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-row gap-2 items-center">
-                                <input type="checkbox" id="checkbox" className="h-4 w-4" />
+                                <input type="checkbox" id="checkbox" className="h-4 w-4 hover:cursor-pointer" />
                                 <label htmlFor="checkbox" className="text-gray-600"> Remember me</label>
                             </div>
                             <span className="text-semiprimary font-medium cursor-pointer hover:underline"><Link to="/forgot-password">Forgot Password?</Link></span>

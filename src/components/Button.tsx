@@ -12,7 +12,7 @@ interface ButtonInterface extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 function Button({ className, children, icon, ...props }: ButtonInterface) {
   return <>
     <div>
-      <motion.button className={"btn justify-center items-center  text-lg font-bold hover:cursor-pointer " + className} {...props} >
+      <motion.button className={"btn justify-center items-center  text-lg font-bold " + className} {...props} >
         {icon && <span className="flex items-center">{icon}</span>}
         {children}
       </motion.button>

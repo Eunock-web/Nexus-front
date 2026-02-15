@@ -11,7 +11,6 @@ import { useAuth } from "../../../hooks/useAuth";
 import useGoogle from "../hooks/useGoogle";
 import useGithub from "../hooks/useGithub";
 
-
 function RegisterForm() {
 
     //Usage de l'hook useForm pour la gestion du formulaire
@@ -50,7 +49,11 @@ function RegisterForm() {
 
                 <div>
                     {/**Logo + Appname */}
-                    <h1 className="text-5xl font-black"> Nexus </h1>
+                    <h1 className="text-5xl font-black"> 
+                        <Link to={"/"}>
+                            Nexus
+                        </Link>    
+                     </h1>
                 </div>
 
                 <div className="flex flex-col gap-4 relative z-10 max-w-[80%]">
@@ -188,7 +191,7 @@ function RegisterForm() {
                             </div>
 
                             <div className="flex flex-row gap-2">
-                                <input type="checkbox" className="h-4 w-4 mt-1" />
+                                <input type="checkbox" className="h-4 w-4 mt-1 hover:cursor-pointer"  />
                                 <p className="text-gray-500"> I agree to the <span className="text-semiprimary font-bold text-sm leading-relaxed">Terms of Service</span> and <span className="text-semiprimary font-bold text-sm leading-relaxed">Privacy Policy.</span></p>
                             </div>
 
@@ -201,12 +204,12 @@ function RegisterForm() {
 
                         {/**Boutton de l'OAuth2 */}
                         <div className="flex flex-row justify-between mb-5 ">
-                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => googleLogin()} >
+                            <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer " onClick={() => googleLogin()} >
                                 <FcGoogle size={30} />
                                 <span className="flex font-semibold text-lg items-center"> Google </span>
                             </Button>
 
-                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white" onClick={() => githubLogin()} >
+                            <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer" onClick={() => githubLogin()} >
                                 <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
                                 <span className="flex font-semibold text-lg items-center "> GitHub </span>
                             </Button>
