@@ -1,53 +1,101 @@
-import { Plus, Sparkles } from "lucide-react"
+import { ArrowLeft, Plus, Sparkles } from "lucide-react"
 import Button from "../../components/Button"
+import { Link } from "react-router-dom"
 
 
 function CreateCard() {
     return <>
-        <div className=" flex flex-col border border-gray-400 p-5 gap-5 ">
-            <div className="flex flex-col gap-3 ">
-                <div className="flex flex-row gap-5 ">
-                    <Sparkles size={45} className="border p-2 rounded-xl" />
-                    <h1 className="flex items-center"> Créez votre espace de travail </h1>
+        <div className="max-w-4xl mx-auto mt-10 p-1 flex flex-col gap-6">
+            {/* Back button and Step indicator */}
+            <div className="flex flex-col gap-4 px-2">
+                <Link to="/dashboard">
+                    <button className="flex items-center gap-2 text-gray-400 hover:text-white hover:cursor-pointer  transition-colors w-fit group">
+                        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-sm font-medium">Retour</span>
+                    </button>
+                </Link>
+
+                <div className="space-y-2">
+                    <p className="text-xs font-semibold text-purple-500 uppercase tracking-wider">Étape 1 / 2</p>
+                    <div className="relative h-1.5 w-full bg-gray-800 rounded-full overflow-hidden">
+                        <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full shadow-[0_0_8px_rgba(147,51,234,0.5)]"></div>
+                    </div>
                 </div>
-                <p> Un workspace vous permet d'organiser vos projets et de collaborer avec notre équipe.</p>
             </div>
 
-            <form className="flex flex-col gap-3">
-                <div className="flex flex-col gap-3 ">
-                    <label htmlFor="workspaceName"> NOM DU WORKSPACE</label>
-                    <input type="text" id="workspaceName" className="border " />
+            {/* Main Card */}
+            <div className="bg-[#161625] border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-8">
+                <div className="flex flex-col gap-4">
+                    <div className="flex items-center gap-4">
+                        <div className="bg-purple-600/10 p-3 rounded-xl border border-purple-500/20">
+                            <Sparkles size={28} className="text-purple-500 fill-purple-500/20" />
+                        </div>
+                        <h1 className="text-2xl font-bold text-white tracking-tight">Créez votre espace de travail</h1>
+                    </div>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                        Un workspace vous permet d'organiser vos projets et de collaborer avec votre équipe.
+                    </p>
                 </div>
 
-                <div className="flex flex-col gap-3 ">
-                    <label htmlFor="description"> DESCRIPTION</label>
-                    <input type="text" id="description" className="border" />
-                </div>
-
-                <div className="flex flex-row gap-3 ">
-                    <div className="flex flex-col ">
-                        <label htmlFor="email"> INVITER DES MEMBRES </label>
-                        <input type="email" id="email" className="border" />
-                    </div>
-                    <div className="flex items-center mt-5">
-                        <Plus className="border p-2" size={45} />
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-2">
-                    <div>
-                        <input type="reset" />
+                <form className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="workspaceName" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
+                            Nom du Workspace <span className="text-red-500 text-lg">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="workspaceName"
+                            placeholder="Ex: Équipe Design, Mon Freelance, Projet Alpha"
+                            className="bg-[#0F0F1A] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600"
+                        />
                     </div>
 
-                    <div>
-                        <Button className="">Créer et continuer</Button>
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="description" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                            Description <span className="text-gray-600 font-normal ml-1 lowercase">(optionnel)</span>
+                        </label>
+                        <textarea
+                            id="description"
+                            rows={3}
+                            placeholder="Décrivez brièvement l'objectif de ce workspace..."
+                            className="bg-[#0F0F1A] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600 resize-none"
+                        />
                     </div>
-                </div>
-            </form>
 
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="email" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                            Inviter des membres <span className="text-gray-600 font-normal ml-1 lowercase">(optionnel)</span>
+                        </label>
+                        <p className="text-[11px] text-gray-500 mb-1">Ajoutez des collaborateurs par email. Vous pourrez aussi les inviter plus tard.</p>
+                        <div className="flex gap-2">
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="nom@entreprise.com"
+                                className="flex-1 bg-[#0F0F1A] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600"
+                            />
+                            <button type="button" className="p-3 bg-[#0F0F1A] border border-gray-800 rounded-xl text-gray-400 hover:text-white hover:border-gray-600 transition-all">
+                                <Plus size={20} />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-row justify-between pt-4">
+                        <button type="reset" className="flex-1 py-3 text-sm font-semibold text-gray-400 hover:text-white transition-colors border border-gray-800 rounded-xl">
+                            Annuler
+                        </button>
+                        <Button className="flex-[1.5] bg-purple-600 hover:bg-purple-700 text-white rounded-xl py-3 shadow-lg shadow-purple-600/20">
+                            Créer et continuer
+                        </Button>
+                    </div>
+                </form>
+            </div>
+
+            <p className="text-center text-[15px] text-gray-500 mt-2">
+                ✨ Vous pourrez personnaliser votre workspace après sa création
+            </p>
         </div>
     </>
-
 }
 
 export default CreateCard

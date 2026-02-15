@@ -11,47 +11,89 @@ import Dashboard from "../pages/Dashboard";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { OtpGuard } from "../features/otp/api/OtpGuard";
 import WorkSpace from "../features/workspace/components/WorkSpace";
+import ForgotPassword from "../features/auth/components/ForgotPassword";
+import UpdatePassword from "../features/auth/components/UpdatePassword";
+import ValidateEmail from "../features/auth/components/ValidateEmail";
+import GoogleResponse from "../features/auth/components/GoogleResponse";
+import GithubResponse from "../features/auth/components/GithubResponse";
+import AnimationTest from "../components/AnimationTest";
 
 
- const appRouter = createBrowserRouter([
+const appRouter = createBrowserRouter([
     {
-        path : "/",
-        element : React.createElement(Layout),
-        errorElement : React.createElement(ErrorPage),
-        children : [
+        path: "/",
+        element: React.createElement(Layout),
+        errorElement: React.createElement(ErrorPage),
+        children: [
             {
-                index : true,
-                element : React.createElement(Home)
+                index: true,
+                element: React.createElement(Home)
             },
 
             {
-                path : "/login",
-                element : React.createElement(LoginForm)
-            }, 
-            
-            {
-                path : "/register",
-                element : React.createElement(RegisterForm)
+                path: "/login",
+                element: React.createElement(LoginForm)
             },
 
             {
-                path : "/dashboard",
-                element : React.createElement(ProtectedRoute, null, React.createElement(Dashboard))
+                path: "/animation",
+                element: React.createElement(AnimationTest)
             },
-            
+
             {
-                path : "/otp",
-                element : React.createElement(OtpGuard, null, React.createElement(OtpCard))
+                path: "/register",
+                element: React.createElement(RegisterForm)
             },
 
             {
                 path : "/workspaceCreate",
                 element : React.createElement(ProtectedRoute, null, React.createElement(WorkSpace))
             },
+            
+            {
+                path: "/dashboard",
+                element: React.createElement(ProtectedRoute, null, React.createElement(Dashboard))
+            },
 
             {
-                path : "*",
-                element : React.createElement(NotFound)
+                path: "/otp",
+                element: React.createElement(OtpGuard, null, React.createElement(OtpCard))
+            },
+
+            {
+                path: "/verify-account",
+                element: React.createElement(OtpGuard, null, React.createElement(OtpCard))
+            },
+
+            {
+                path: "/forgot-password",
+                element: React.createElement(ForgotPassword)
+            },
+
+            {
+                path: "/reset-password/:token",
+                element: React.createElement(ValidateEmail)
+            },
+
+            {
+                path: "/updatePassword",
+                element: React.createElement(UpdatePassword)
+            },
+
+
+            {
+                path: "api/Oauth/google/callback",
+                element: React.createElement(GoogleResponse)
+            },
+
+            {
+                path: "api/Oauth/github/callback",
+                element: React.createElement(GithubResponse)
+            },
+
+            {
+                path: "*",
+                element: React.createElement(NotFound)
             }
         ]
     }

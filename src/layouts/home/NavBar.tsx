@@ -1,5 +1,6 @@
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 
 function NavBar(){
     return <>
@@ -15,11 +16,12 @@ function NavBar(){
                     <h1 className="flex font-bold text-2xl text-white items-center ">Nexus</h1>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2">
-                    <Button className=" hidden sm:block bg-dark border-dark px-6 py-2 rounded-xl text-white ">
+
+                    <motion.button className=" hidden sm:block bg-dark border-dark px-6 py-2 rounded-xl text-white">
                         <Link to={"/login"}>
                             Login
                         </Link>
-                    </Button>
+                    </motion.button>
                     <Button className=" bg-primary border-primary px-4 py-2 rounded-xl text-white " >
                         <Link to={"/register"}>
                             Get Started

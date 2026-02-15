@@ -1,14 +1,14 @@
-import Footer from "../../../layouts/Launcher/Footer";
 import NavBar from "../../../layouts/Launcher/NavBar";
 import CreateCard from "../../../layouts/workspace/CreateCard";
 
 
-function WorkSpace(){
+function WorkSpace() {
     return <>
-        <div className="">
+        <div className="min-h-screen bg-[#0F0F1A] text-white">
             <NavBar />
-            <CreateCard />
-            <Footer/>
+            <div className="flex justify-center items-center py-10 px-4">
+                <CreateCard />
+            </div>
         </div>
     </>
 }
