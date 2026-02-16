@@ -17,6 +17,7 @@ import ValidateEmail from "../features/auth/components/ValidateEmail";
 import GoogleResponse from "../features/auth/components/GoogleResponse";
 import GithubResponse from "../features/auth/components/GithubResponse";
 import AnimationTest from "../components/AnimationTest";
+import Project from "../features/Project/components/Project";
 
 
 const appRouter = createBrowserRouter([
@@ -48,6 +49,11 @@ const appRouter = createBrowserRouter([
             {
                 path : "/workspaceCreate",
                 element : React.createElement(ProtectedRoute, null, React.createElement(WorkSpace))
+            },
+
+            {
+                path : "/createProject",
+                element : React.createElement(ProtectedRoute, null, React.createElement(Project))
             },
             
             {
