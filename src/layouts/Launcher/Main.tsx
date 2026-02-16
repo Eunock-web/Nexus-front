@@ -1,11 +1,15 @@
 import { ArrowRight } from "lucide-react"
 import { motion } from 'motion/react'
 import { Link } from "react-router-dom"
+import FeatureCards from "./FeatureCards"
 
 
 function LaunchMain() {
     return <>
         <div className="flex flex-col  h-screen items-center justify-center  bg-dark">
+
+            {/* Feature Cards Section */}
+            <FeatureCards />
 
             <div className="flex flex-col gap-6 text-center ">
                 <div className="flex flex-col gap-6">

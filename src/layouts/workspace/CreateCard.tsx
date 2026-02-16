@@ -18,13 +18,13 @@ function CreateCard() {
                 <div className="space-y-2">
                     <p className="text-xs font-semibold text-purple-500 uppercase tracking-wider">Étape 1 / 2</p>
                     <div className="relative h-1.5 w-full bg-gray-800 rounded-full overflow-hidden">
-                        <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full shadow-[0_0_8px_rgba(147,51,234,0.5)]"></div>
+                        <div className="absolute top-0 left-0 h-full w-1/2 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full shadow-[0_0_8px_rgba(147,51,234,0.5)]"></div>
                     </div>
                 </div>
             </div>
 
             {/* Main Card */}
-            <div className="bg-[#161625] border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-8">
+            <div className="bg-[#16163b] border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-4">
                         <div className="bg-purple-600/10 p-3 rounded-xl border border-purple-500/20">
@@ -74,19 +74,16 @@ function CreateCard() {
                                 placeholder="nom@entreprise.com"
                                 className="flex-1 bg-[#0F0F1A] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600"
                             />
-                            <button type="button" className="p-3 bg-[#0F0F1A] border border-gray-800 rounded-xl text-gray-400 hover:text-white hover:border-gray-600 transition-all">
-                                <Plus size={20} />
-                            </button>
                         </div>
                     </div>
 
-                    <div className="flex flex-row justify-between pt-4">
-                        <button type="reset" className="flex-1 py-3 text-sm font-semibold text-gray-400 hover:text-white transition-colors border border-gray-800 rounded-xl">
+                    <div className="flex flex-row justify-between gap-3 pt-4">
+                        <button type="reset" className="w-1/2 py-3 text-sm font-semibold text-gray-400 hover:text-white hover:cursor-pointer transition-colors border border-gray-800 rounded-xl">
                             Annuler
                         </button>
-                        <Button className="flex-[1.5] bg-purple-600 hover:bg-purple-700 text-white rounded-xl py-3 shadow-lg shadow-purple-600/20">
+                        <button className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white jhover:cursor-pointer rounded-xl py-3 shadow-lg shadow-purple-600/20">
                             Créer et continuer
-                        </Button>
+                        </button>
                     </div>
                 </form>
             </div>
