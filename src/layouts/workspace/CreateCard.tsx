@@ -1,5 +1,4 @@
-import { ArrowLeft, Plus, Sparkles } from "lucide-react"
-import Button from "../../components/Button"
+import { ArrowLeft, Sparkles } from "lucide-react"
 import { Link } from "react-router-dom"
 
 
