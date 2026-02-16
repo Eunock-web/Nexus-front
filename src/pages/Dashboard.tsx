@@ -6,11 +6,11 @@ import NavBar from "../layouts/Launcher/NavBar";
 
 function Dashboard(){
     return <>
-        <div className="">
+        <div className=" bg-dark">
             <NavBar />   
-            <div className="border-b border-b-gray-300"></div> 
+            <div className="border-b border-b-gray-500"></div> 
             <LaunchMain />
-            <div className="border-b border-b-gray-300"></div> 
+            <div className="border-b border-b-gray-500"></div> 
             <Footer />
         </div>        
     </>

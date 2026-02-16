@@ -2,13 +2,13 @@
 
 function Footer(){
     return <>
-        <div className="flex flex-col mb-7">
+        <div className="flex flex-col bg-dark">
             <div className="grid grid-cols-2 py-5  mx-2 px-3 text-center">
-                    <p> Centre d'aide </p>
-                    <p>Documentation </p>
+                    <p className="text-xl text-white/50"> Centre d'aide </p>
+                    <p className="text-xl text-white/50">Documentation </p>
             </div>
 
-            <p className="text-center">Support </p>            
+            <p className="text-center text-xl text-white/50">Support </p>            
         </div>
     </>
 }
