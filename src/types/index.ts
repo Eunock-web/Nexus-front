@@ -59,10 +59,13 @@ export interface OtpResponse {
 //interface pour l'AuthContext
 export interface AuthContextType {
     user: User | null;
+    isAuthenticated: boolean,
     loading: boolean;
     tempEmail: string | null;
     setTempEmail: (email: string) => void;
-    saveSession: (token: string, user: User) => void;
+    saveSession: (accessToken: string, user: User) => void;
+    saveToken: (refreshToken: string) => void;
+    getToken: () => string | undefined;
     logout: () => void;
 }
 
@@ -127,4 +130,33 @@ export interface GithubResponse {
 //interface de retour de github OAuth
 export interface GithubRedirectResponse {
     url: string
+}
+
+//interface de la workspace
+export interface WorkSpaceInterface {
+    name: string
+    slug?: string
+    email?: string
+    logoUrl?: string
+}
+
+//Retour de workspace
+export interface WorkSpaceResponse {
+    success: boolean
+    response: string
+    workspace?: {}
+}
+
+//interface de la donnée qui sera envoyé par le front pour le project
+export interface ProjectInterface {
+    name: string
+    color?: string
+    tagname: string
+}
+
+//Interface pour le retour de la requete
+export interface ProjectResponse {
+    success: boolean
+    response: string
+    message?: string
 }

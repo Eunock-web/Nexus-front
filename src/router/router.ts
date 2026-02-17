@@ -8,7 +8,7 @@ import LoginForm from "../features/auth/components/LoginForm";
 import RegisterForm from "../features/auth/components/RegisterForm";
 import OtpCard from "../features/otp/components/OtpCard";
 import Dashboard from "../pages/Dashboard";
-import { ProtectedRoute } from "../components/ProtectedRoute";
+import { ProtectedRoute } from "../middleware/ProtectedRoute";
 import { OtpGuard } from "../features/otp/api/OtpGuard";
 import WorkSpace from "../features/workspace/components/WorkSpace";
 import ForgotPassword from "../features/auth/components/ForgotPassword";
@@ -16,7 +16,6 @@ import UpdatePassword from "../features/auth/components/UpdatePassword";
 import ValidateEmail from "../features/auth/components/ValidateEmail";
 import GoogleResponse from "../features/auth/components/GoogleResponse";
 import GithubResponse from "../features/auth/components/GithubResponse";
-import AnimationTest from "../components/AnimationTest";
 import Project from "../features/Project/components/Project";
 
 
@@ -34,11 +33,6 @@ const appRouter = createBrowserRouter([
             {
                 path: "/login",
                 element: React.createElement(LoginForm)
-            },
-
-            {
-                path: "/animation",
-                element: React.createElement(AnimationTest)
             },
 
             {

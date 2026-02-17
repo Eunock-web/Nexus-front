@@ -11,14 +11,15 @@ function useGithubResponse() {
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
     const navigate = useNavigate();
-    const { saveSession } = useAuth();
+    const { saveSession , saveToken} = useAuth();
     const hasFetched = useRef(false);
 
     const mutation = useMutation<GithubResponse, Error, string>({
         mutationFn: GithubResponseApi,
         onSuccess: (data) => {
-            if (data.accessToken) {
-                saveSession(data.accessToken, data.user as any); 
+            if (data.accessToken && data.refreshToken && data.user) {
+                saveSession(data.accessToken, data.user);
+                saveToken(data.refreshToken)
                 navigate('/dashboard');
             }
         },

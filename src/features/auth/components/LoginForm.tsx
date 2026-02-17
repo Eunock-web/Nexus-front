@@ -20,13 +20,13 @@ function LoginForm() {
         resolver: zodResolver(LoginSchema)
     });
     const navigate = useNavigate();
-    const { saveSession } = useAuth();
-    4
+    const { saveSession, saveToken } = useAuth();
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         mutate(data, {
             onSuccess: (data) => {
                 if (data.user) {
-                    saveSession(data.accessToken, data.user);
+                    saveSession(data.accessToken,  data.user);
+                    saveToken(data.refreshToken);
                     setTimeout(() => navigate("/dashboard"), 3000);
                 }
             }
@@ -49,11 +49,11 @@ function LoginForm() {
                 </div>
 
                 <div className="relative z-10">
-                    <h1 className="text-5xl font-black"> 
+                    <h1 className="text-5xl font-black">
                         <Link to={"/"}>
                             Nexus
-                        </Link>    
-                     </h1>
+                        </Link>
+                    </h1>
                 </div>
 
                 <div className="flex flex-col gap-4 relative z-10 max-w-[80%]">
@@ -145,12 +145,12 @@ function LoginForm() {
 
                     {/** OAuth2 Buttons */}
                     <div className="flex flex-row justify-between mb-8">
-                        <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => googleLogin()}>
+                        <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer " onClick={() => googleLogin()}>
                             <FcGoogle size={30} />
                             <span className="flex font-semibold text-lg items-center"> Google </span>
                         </Button>
 
-                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white " onClick={() => githubLogin()} >
+                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer " onClick={() => githubLogin()} >
                             <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
                             <span className="flex font-semibold text-lg items-center"> GitHub </span>
                         </Button>

@@ -11,15 +11,15 @@ function useGoogleResponse() {
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
     const navigate = useNavigate();
-    const { saveSession } = useAuth();
+    const { saveSession, saveToken } = useAuth();
     const hasFetched = useRef(false);
 
     const mutation = useMutation<GoogleResponse, Error, string>({
         mutationFn: GoogleApiResponse,
         onSuccess: (data) => {
-            console.log("Données reçues de Google API:", data);
-            if (data.accessToken) {
-                saveSession(data.accessToken, data.user as any); 
+            if (data.accessToken && data.refreshToken && data.user) {
+                saveSession(data.accessToken, data.user);
+                saveToken(data.refreshToken)
                 navigate('/dashboard');
             }
         },

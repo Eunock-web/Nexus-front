@@ -1,8 +1,29 @@
 import { ArrowLeft, Sparkles } from "lucide-react"
-import { Link } from "react-router-dom"
-
+import { Link, useNavigate } from "react-router-dom"
+import useWorkSpace from "../../features/workspace/hooks/useWorkSpace"
+import { useForm, type SubmitHandler } from "react-hook-form";
+import type { WorkSpaceInterface } from "../../types";
+import { WorkSpaceSchema, type WorkSpaceType } from "../../features/workspace/schemas/WorkspaceSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function CreateCard() {
+    const navigate = useNavigate();
+    const { mutate, isSuccess, isPending, isError,error, data } = useWorkSpace();
+
+    const { register, handleSubmit, formState: { errors } } = useForm<WorkSpaceType>({
+        resolver: zodResolver(WorkSpaceSchema)
+    });
+
+    const onSubmit: SubmitHandler<WorkSpaceType> = (data) => {
+        mutate(data as unknown as WorkSpaceInterface, {
+            onSuccess: () => {
+                setTimeout(() => {
+                    navigate("/createProject");
+                }, 500);
+            }
+        })
+    }
+
     return <>
         <div className="max-w-5xl mx-auto mt-10 p-1 flex flex-col gap-6">
             {/* Back button and Step indicator */}
@@ -21,6 +42,18 @@ function CreateCard() {
                     </div>
                 </div>
             </div>
+            
+            <div className="flex items-center justify-center">
+                {
+                    isError && <span className="  text-red-500 text-center "> {error.message} </span>
+                }
+            </div>
+
+            <div className="flex items-center justify-center">
+                {
+                    isSuccess && <span className="text-green-500 text-center"> {data.response} </span>
+                }
+            </div>
 
             {/* Main Card */}
             <div className="bg-[#16163b] border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-8">
@@ -36,7 +69,7 @@ function CreateCard() {
                     </p>
                 </div>
 
-                <form className="flex flex-col gap-6">
+                <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)} >
                     <div className="flex flex-col gap-2">
                         <label htmlFor="workspaceName" className="text-[12px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
                             Nom du Workspace <span className="text-red-500 text-lg">*</span>
@@ -46,7 +79,9 @@ function CreateCard() {
                             id="workspaceName"
                             placeholder="Ex: Équipe Design, Mon Freelance, Projet Alpha"
                             className="bg-[#0c0c31] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600"
+                            {...register("name")}
                         />
+                        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -58,7 +93,9 @@ function CreateCard() {
                             rows={3}
                             placeholder="Décrivez brièvement l'objectif de ce workspace..."
                             className="bg-[#0c0c31] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600 resize-none"
+                            {...register("slug")}
                         />
+                        {errors.slug && <p className="text-red-500 text-sm mt-1">{errors.slug.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -72,7 +109,10 @@ function CreateCard() {
                                 id="email"
                                 placeholder="nom@entreprise.com"
                                 className="flex-1 bg-[#0c0c31] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600"
+                                {...register("email")}
+
                             />
+                            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                         </div>
                     </div>
 
@@ -80,8 +120,8 @@ function CreateCard() {
                         <button type="reset" className="w-1/2 py-3 text-sm font-semibold text-gray-400 hover:text-white hover:cursor-pointer transition-colors border border-gray-800 rounded-xl">
                             Annuler
                         </button>
-                        <button className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white   hover:cursor-pointer rounded-xl py-3 shadow-lg shadow-purple-600/20">
-                            <Link to={"/createProject"}>Créer et continuer</Link>
+                        <button className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer rounded-xl py-3 shadow-lg shadow-purple-600/20" type="submit" disabled={isPending} onClick={()=>console.log("BOutton cliquer")}>
+                            {isPending ? 'En cours ...' : 'Créer et continuer'}
                         </button>
                     </div>
                 </form>
