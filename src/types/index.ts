@@ -162,14 +162,14 @@ export interface ProjectResponse {
 }
 
 //interface pour le retour de la liste des workspace
-export interface SpaceListResponse{
-    success? : boolean
-    workspaces : {
-        name : string
-        slug : string
-        logoUrl? : string
-        firstname : string
-        lastname : string
-        avatarUrl : string
+export interface SpaceListResponse {
+    success?: boolean
+    workspaces: {
+        name: string
+        slug: string
+        logoUrl?: string
+        firstname: string
+        lastname: string
+        avatarUrl: string
     }
 }

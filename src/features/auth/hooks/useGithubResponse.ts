@@ -11,7 +11,7 @@ function useGithubResponse() {
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
     const navigate = useNavigate();
-    const { saveSession , saveToken} = useAuth();
+    const { saveSession, saveToken } = useAuth();
     const hasFetched = useRef(false);
 
     const mutation = useMutation<GithubResponse, Error, string>({

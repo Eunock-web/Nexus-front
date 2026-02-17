@@ -20,13 +20,13 @@ function LoginForm() {
         resolver: zodResolver(LoginSchema)
     });
     const navigate = useNavigate();
-    const { saveSession, saveToken } = useAuth();
+    const { saveSession } = useAuth();
     const onSubmit: SubmitHandler<LoginInterface> = (data) => {
         mutate(data, {
             onSuccess: (data) => {
                 if (data.user) {
-                    saveSession(data.accessToken,  data.user);
-                    saveToken(data.refreshToken);
+                    saveSession(data.accessToken, data.user);
+                    // saveToken(data.refreshToken);
                     setTimeout(() => navigate("/dashboard"), 3000);
                 }
             }
