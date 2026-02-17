@@ -5,7 +5,7 @@ import {  type LoginInterface, type LoginResponse } from "../../../types";
 
 function useLogin(){
     return useMutation<LoginResponse, Error, LoginInterface>({
-        mutationFn : LoginApi
+        mutationFn: (data: LoginInterface) => LoginApi(data),
     });
 }
 

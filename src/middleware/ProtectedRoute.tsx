@@ -7,8 +7,8 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-    const { user, loading, isAuthenticated } = useAuth();
-
+    const { user, loading, getToken,logout } = useAuth();
+    const token = getToken();
     if (loading) {
         return (
             <div className="flex h-screen items-center justify-center">
@@ -17,7 +17,8 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         );
     }
 
-    if (!user || !isAuthenticated) {
+    if (!user || !token) {
+        logout();
         return <Navigate to="/login" replace />;
     }
 

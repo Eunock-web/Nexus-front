@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { refreshAccessToken } from "../features/auth/api/RefreshApi";
+
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     headers: {
@@ -23,10 +24,13 @@ const processQueue = (error: any, token: string | null = null) => {
     failedQueue = [];
 };
 
+// ✅ Routes publiques qui ne nécessitent pas de token
+const publicRoutes = ['login', 'register', 'forgot-password', 'reset-password'];
+
 // Request interceptor to add the access token
 api.interceptors.request.use(
     (config) => {
-        const token = Cookies.get('refreshToken');
+        const token = localStorage.getItem('accessToken');
         if (token && !config.headers.Authorization) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -45,7 +49,17 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+        // ✅ Vérifie si c'est une route publique
+        const isPublicRoute = publicRoutes.some(route =>
+            originalRequest.url?.includes(route)
+        );
+
+        if (
+            error.response &&
+            error.response.status === 401 &&
+            !originalRequest._retry &&
+            !isPublicRoute // ✅ Ne pas tenter de refresh sur les routes publiques
+        ) {
             if (isRefreshing) {
                 return new Promise(function (resolve, reject) {
                     failedQueue.push({ resolve, reject });
@@ -65,7 +79,7 @@ api.interceptors.response.use(
                 const { accessToken } = data;
 
                 localStorage.setItem('accessToken', accessToken);
-                originalRequest.headers['Authorization'] = 'Bearer ' + accessToken;
+                originalRequest.headers['Authorization'] = 'Bearer ' + accessToken; // ✅ Décommenté
 
                 processQueue(null, accessToken);
                 return api(originalRequest);

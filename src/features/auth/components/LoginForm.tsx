@@ -136,7 +136,7 @@ function LoginForm() {
                             <span className="text-semiprimary font-medium cursor-pointer hover:underline"><Link to="/forgot-password">Forgot Password?</Link></span>
                         </div>
 
-                        <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mt-2" disabled={isPending}>
+                        <Button className="rounded-xl bg-semiprimary px-4 py-3 w-full text-white mt-2 hover:cursor-pointer" disabled={isPending}>
                             {isPending ? 'Envoi en cours...' : 'Sign In'}
                         </Button>
                     </form>
