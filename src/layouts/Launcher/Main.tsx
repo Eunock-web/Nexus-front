@@ -6,7 +6,7 @@ import FeatureCards from "./FeatureCards"
 
 function LaunchMain() {
     return <>
-        <div className="flex flex-col  h-screen items-center justify-center  bg-dark">
+        <div className="flex flex-col lg:h-screen items-center justify-center  bg-dark">
 
             {/* Feature Cards Section */}
             <FeatureCards />

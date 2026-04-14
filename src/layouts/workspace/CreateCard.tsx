@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 function CreateCard() {
     const navigate = useNavigate();
-    const { mutate, isSuccess, isPending, isError,error, data } = useWorkSpace();
+    const { mutate, isSuccess, isPending, isError, error, data } = useWorkSpace();
 
     const { register, handleSubmit, formState: { errors } } = useForm<WorkSpaceType>({
         resolver: zodResolver(WorkSpaceSchema)
@@ -16,10 +16,10 @@ function CreateCard() {
 
     const onSubmit: SubmitHandler<WorkSpaceType> = (data) => {
         mutate(data as unknown as WorkSpaceInterface, {
-            onSuccess: () => {
+            onSuccess: (data) => {
                 setTimeout(() => {
-                    navigate("/createProject");
-                }, 500);
+                    navigate("/createProject", { state: { workspaceId: data.workspace?.id } });
+                }, 2000);
             }
         })
     }
@@ -42,7 +42,7 @@ function CreateCard() {
                     </div>
                 </div>
             </div>
-            
+
             <div className="flex items-center justify-center">
                 {
                     isError && <span className="  text-red-500 text-center "> {error.message} </span>
@@ -120,7 +120,7 @@ function CreateCard() {
                         <button type="reset" className="w-1/2 py-3 text-sm font-semibold text-gray-400 hover:text-white hover:cursor-pointer transition-colors border border-gray-800 rounded-xl">
                             Annuler
                         </button>
-                        <button className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer rounded-xl py-3 shadow-lg shadow-purple-600/20" type="submit" disabled={isPending} onClick={()=>console.log("BOutton cliquer")}>
+                        <button className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white hover:cursor-pointer rounded-xl py-3 shadow-lg shadow-purple-600/20" type="submit" disabled={isPending} >
                             {isPending ? 'En cours ...' : 'Créer et continuer'}
                         </button>
                     </div>

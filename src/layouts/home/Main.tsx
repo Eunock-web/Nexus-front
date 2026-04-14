@@ -106,7 +106,7 @@ function Main() {
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.1 }}
                 >
                     {["TECHCORP", "NEXUS", "ORBITAL", "VANTAGE", "SYNERGY"].map((brand) => (
                         <motion.h1

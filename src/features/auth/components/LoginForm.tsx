@@ -17,21 +17,23 @@ function LoginForm() {
     const { login: githubLogin } = useGithub();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginType>({
-        resolver: zodResolver(LoginSchema)
+        resolver: zodResolver(LoginSchema),
+        defaultValues: {
+            rememberMe: false
+        }
     });
     const navigate = useNavigate();
     const { saveSession } = useAuth();
-    const onSubmit: SubmitHandler<LoginInterface> = (data) => {
-        mutate(data, {
-            onSuccess: (data) => {
-                if (data.user) {
-                    saveSession(data.accessToken, data.user);
-                    // saveToken(data.refreshToken);
-                    setTimeout(() => navigate("/dashboard"), 3000);
+    const onSubmit: SubmitHandler<LoginInterface> = (formData) => {
+        mutate(formData, {
+            onSuccess: (responseData) => {
+                if (responseData.user) {
+                    saveSession(responseData.accessToken, responseData.user);
+                    // saveToken(responseData.refreshToken);
+                    setTimeout(() => navigate("/launcher"), 3000);
                 }
             }
-        }
-        );
+        });
     }
 
     return (
@@ -92,7 +94,7 @@ function LoginForm() {
                 {/** Gestion des retours API */}
                 <div className="text-center">
                     {error && <span className="text-red-500 font-medium"> {error.message} </span>}
-                    {isSuccess && <span className="text-green-500 font-medium"> {data.response} </span>}
+                    {isSuccess && <span className="text-green-500 font-medium"> {data?.response} </span>}
                 </div>
 
                 {/** Formulaire */}
@@ -107,7 +109,6 @@ function LoginForm() {
                                     className="w-full placeholder-gray-700 text-lg outline-0 bg-transparent"
                                     placeholder="Enter your Email"
                                     {...register("email")}
-                                    required
                                 />
                             </div>
                             {errors.email && <span className="text-red-500">{errors.email.message}</span>}
@@ -122,7 +123,6 @@ function LoginForm() {
                                     className="w-full placeholder-gray-700 text-lg outline-0 bg-transparent"
                                     placeholder="Enter your password"
                                     {...register("password")}
-                                    required
                                 />
                             </div>
                             {errors.password && <span className="text-red-500">{errors.password.message}</span>}
@@ -130,7 +130,7 @@ function LoginForm() {
 
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-row gap-2 items-center">
-                                <input type="checkbox" id="checkbox" className="h-4 w-4 hover:cursor-pointer" />
+                                <input type="checkbox" id="checkbox" className="h-4 w-4 hover:cursor-pointer" {...register("rememberMe")} />
                                 <label htmlFor="checkbox" className="text-gray-600"> Remember me</label>
                             </div>
                             <span className="text-semiprimary font-medium cursor-pointer hover:underline"><Link to="/forgot-password">Forgot Password?</Link></span>
@@ -145,12 +145,12 @@ function LoginForm() {
 
                     {/** OAuth2 Buttons */}
                     <div className="flex flex-row justify-between mb-8">
-                        <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer " onClick={() => googleLogin()}>
+                        <Button className="flex flex-row gap-2 lg:px-18  px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer disabled:opacity-50" onClick={() => googleLogin()} disabled={isPending}>
                             <FcGoogle size={30} />
                             <span className="flex font-semibold text-lg items-center"> Google </span>
                         </Button>
 
-                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer " onClick={() => githubLogin()} >
+                        <Button className="flex flex-row gap-2 lg:px-20 px-9 py-2 border border-gray-400 rounded-xl transition-colors hover:bg-primary hover:text-white hover:cursor-pointer disabled:opacity-50" onClick={() => githubLogin()} disabled={isPending}>
                             <GithubIcon className=" hover:bg-primary hover:text-white  text-black" size={30} />
                             <span className="flex font-semibold text-lg items-center"> GitHub </span>
                         </Button>

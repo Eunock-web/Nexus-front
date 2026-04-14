@@ -20,7 +20,7 @@ function useGoogleResponse() {
             if (data.accessToken && data.refreshToken && data.user) {
                 saveSession(data.accessToken, data.user);
                 saveToken(data.refreshToken)
-                navigate('/dashboard');
+                navigate('/launcher');
             }
         },
         onError: (error) => {

@@ -39,7 +39,8 @@ export interface LoginResponse {
 //interface pour les données du login
 export interface LoginInterface {
     email: string,
-    password: string
+    password: string,
+    rememberMe?: boolean
 }
 
 //interface pour le code otp
@@ -144,13 +145,18 @@ export interface WorkSpaceInterface {
 export interface WorkSpaceResponse {
     success: boolean
     response: string
-    workspace?: {}
+    workspace?: {
+        id: number
+        name: string
+        slug: string
+    }
 }
 
 //interface de la donnée qui sera envoyé par le front pour le project
 export interface ProjectInterface {
     name: string
-    color?: string
+    description?: string
+    couleur?: string
     tagname: string
 }
 

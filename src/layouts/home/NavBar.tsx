@@ -17,7 +17,7 @@ function NavBar() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
 
                     <motion.button
-                        className="hidden sm:block bg-dark border border-white/20 px-6 py-2 rounded-xl text-white"
+                        className="hidden sm:block bg-dark border border-white/20 px-6 py-2 rounded-xl text-white cursor-pointer"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         whileHover={{

@@ -7,7 +7,7 @@ function NavBar() {
     const { user } = useAuth();
 
     return <>
-        <div className="flex flex-row justify-between items-center py-3 px-8 border-b border-dark bg-dark text-white">
+        <div className="flex flex-row justify-between items-center py-3 px-8 border-b border-dark bg-dark text-white ">
 
             {/**Logo plus appName */}
             <div className="flex items-center gap-2">

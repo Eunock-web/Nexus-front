@@ -7,7 +7,6 @@ import NotFound from "../utils/NotFound";
 import LoginForm from "../features/auth/components/LoginForm";
 import RegisterForm from "../features/auth/components/RegisterForm";
 import OtpCard from "../features/otp/components/OtpCard";
-import Dashboard from "../pages/Dashboard";
 import { ProtectedRoute } from "../middleware/ProtectedRoute";
 import { OtpGuard } from "../features/otp/api/OtpGuard";
 import WorkSpace from "../features/workspace/components/WorkSpace";
@@ -17,6 +16,7 @@ import ValidateEmail from "../features/auth/components/ValidateEmail";
 import GoogleResponse from "../features/auth/components/GoogleResponse";
 import GithubResponse from "../features/auth/components/GithubResponse";
 import Project from "../features/Project/components/Project";
+import Launcher from "../pages/Launcher";
 
 
 const appRouter = createBrowserRouter([
@@ -46,13 +46,13 @@ const appRouter = createBrowserRouter([
             },
 
             {
-                path : "/createProject",
+                path: "/createProject",
                 element : React.createElement(ProtectedRoute, null, React.createElement(Project))
             },
             
             {
-                path: "/dashboard",
-                element: React.createElement(ProtectedRoute, null, React.createElement(Dashboard))
+                path: "/launcher",
+                element:  React.createElement(ProtectedRoute, null, React.createElement(Launcher))
             },
 
             {
@@ -82,12 +82,12 @@ const appRouter = createBrowserRouter([
 
 
             {
-                path: "api/Oauth/google/callback",
+                path: "/api/Oauth/google/callback",
                 element: React.createElement(GoogleResponse)
             },
 
             {
-                path: "api/Oauth/github/callback",
+                path: "/api/Oauth/github/callback",
                 element: React.createElement(GithubResponse)
             },
 

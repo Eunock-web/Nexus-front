@@ -1,12 +1,19 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ArrowLeft, Sparkles, Briefcase, Rocket, Target, Zap } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { motion } from "motion/react"
 import Template from "../project/template"
 import Couleurs from "../project/Couleurs"
+import { useForm, type SubmitHandler } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ProjectSchema, type ProjectType } from "../../features/Project/schemas/ProjectSchema"
+import useProject from "../../features/Project/hooks/useProject"
 
 function CreateProject() {
-    const [projectName, setProjectName] = useState("")
+    const location = useLocation()
+    const navigate = useNavigate()
+    const workspaceId = location.state?.workspaceId
+
     const [selectedColor, setSelectedColor] = useState("#8B5CF6")
     const [selectedTemplate, setSelectedTemplate] = useState(0)
 
@@ -27,30 +34,69 @@ function CreateProject() {
             title: "Projet Vide",
             description: "Gérez vos campagnes marketing et suivez les performances",
             iconColor: "#EC4899",
-            iconBackground: "rgba(236, 72, 153, 0.1)"
+            iconBackground: "rgba(236, 72, 153, 0.1)",
+            tagname: "Work"
         },
         {
             icon: <Rocket size={20} />,
             title: "Product Launch",
             description: "Planifiez et orchestrez le lancement de nouveaux produits",
             iconColor: "#8B5CF6",
-            iconBackground: "rgba(139, 92, 246, 0.1)"
+            iconBackground: "rgba(139, 92, 246, 0.1)",
+            tagname: "Launch"
         },
         {
             icon: <Target size={20} />,
             title: "Sales Pipeline",
             description: "Suivez vos opportunités de vente du début à la fin",
             iconColor: "#10B981",
-            iconBackground: "rgba(16, 185, 129, 0.1)"
+            iconBackground: "rgba(16, 185, 129, 0.1)",
+            tagname: "Sales"
         },
         {
             icon: <Zap size={20} />,
             title: "Sprint Planning",
             description: "Organisez vos sprints et gérez les tâches de développement",
             iconColor: "#F59E0B",
-            iconBackground: "rgba(245, 158, 11, 0.1)"
+            iconBackground: "rgba(245, 158, 11, 0.1)",
+            tagname: "Development"
         }
     ]
+
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ProjectType>({
+        resolver: zodResolver(ProjectSchema),
+        defaultValues: {
+            couleur: "#8B5CF6",
+            tagname: templates[0].tagname
+        }
+    })
+
+    const projectName = watch("name")
+
+    const { mutate, isPending, isSuccess, isError, error, data } = useProject()
+
+    useEffect(() => {
+        setValue("couleur", selectedColor)
+    }, [selectedColor, setValue])
+
+    useEffect(() => {
+        setValue("tagname", templates[selectedTemplate].tagname)
+        setValue("description", templates[selectedTemplate].description)
+    }, [selectedTemplate, setValue])
+
+    const onSubmit: SubmitHandler<ProjectType> = (formData) => {
+        if (!workspaceId) {
+            console.error("Workspace ID missing")
+            return
+        }
+        mutate({ data: formData, code: workspaceId.toString() }, {
+            onSuccess: () => {
+                setTimeout(() => {
+                    navigate("/dashboard")
+                }, 2000)
+            }
+        })
+    }
 
     return (
         <div className="max-w-5xl mx-auto mt-10 p-1 flex flex-col gap-6">
@@ -76,6 +122,11 @@ function CreateProject() {
                 </div>
             </div>
 
+            <div className="flex items-center justify-center">
+                {isError && <span className="text-red-500 text-center">{error.message}</span>}
+                {isSuccess && <span className="text-green-500 text-center">{data.message}</span>}
+            </div>
+
             {/* Main Card */}
             <div className="bg-[#16163b] border border-gray-800 rounded-2xl p-8 shadow-2xl flex flex-col gap-8">
                 {/* Header */}
@@ -91,7 +142,7 @@ function CreateProject() {
                     </p>
                 </div>
 
-                <form className="flex flex-col gap-8">
+                <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
                     {/* Project Name */}
                     <div className="flex flex-col gap-2">
                         <label htmlFor="nomprojet" className="text-[12px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
@@ -100,11 +151,11 @@ function CreateProject() {
                         <input
                             type="text"
                             id="nomprojet"
-                            value={projectName}
-                            onChange={(e) => setProjectName(e.target.value)}
                             placeholder="Ex: Lancement Produit Q1, Refonte Site Web..."
                             className="bg-[#0c0c31] border border-gray-800 rounded-xl px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all placeholder:text-gray-600"
+                            {...register("name")}
                         />
+                        {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
                     </div>
 
                     {/* Color Selection */}
@@ -167,9 +218,17 @@ function CreateProject() {
                                 <h3 className="text-white font-semibold">
                                     {projectName || "Nom du projet"}
                                 </h3>
-                                <p className="text-sm text-gray-400">
-                                    {templates[selectedTemplate].title}
-                                </p>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm text-gray-400">
+                                        {templates[selectedTemplate].title}
+                                    </span>
+                                    <span
+                                        className="text-[10px] px-2 py-0.5 rounded-full text-white uppercase font-bold"
+                                        style={{ backgroundColor: selectedColor + "40", border: `1px solid ${selectedColor}` }}
+                                    >
+                                        {templates[selectedTemplate].tagname}
+                                    </span>
+                                </div>
                             </div>
                         </motion.div>
                     </div>
@@ -187,9 +246,12 @@ function CreateProject() {
                         <button
                             type="submit"
                             className="w-1/2 bg-purple-600 hover:bg-purple-700 text-white font-semibold hover:cursor-pointer rounded-xl py-3 shadow-lg shadow-purple-600/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            disabled={!projectName.trim()}
+                            disabled={isPending}
+                            onClick={() => {
+                                console.log("Button click");
+                            }}
                         >
-                            Créer le projet
+                            {isPending ? "Création..." : "Créer le projet"}
                         </button>
                     </div>
                 </form>

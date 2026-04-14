@@ -25,7 +25,7 @@ function FeatureCards() {
     ];
 
     return (
-        <div className="w-full py-12 px-6">
+        <div className="w-full py-12 px-6 mb-15 mt-15 hidden lg:block">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
                     {features.map((feature, index) => {

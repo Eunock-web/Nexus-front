@@ -24,7 +24,7 @@ const processQueue = (error: any, token: string | null = null) => {
     failedQueue = [];
 };
 
-// ✅ Routes publiques qui ne nécessitent pas de token
+// Routes publiques qui ne nécessitent pas de token
 const publicRoutes = ['login', 'register', 'forgot-password', 'reset-password'];
 
 // Request interceptor to add the access token
@@ -49,7 +49,7 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-        // ✅ Vérifie si c'est une route publique
+        // Vérifie si c'est une route publique
         const isPublicRoute = publicRoutes.some(route =>
             originalRequest.url?.includes(route)
         );
@@ -58,7 +58,7 @@ api.interceptors.response.use(
             error.response &&
             error.response.status === 401 &&
             !originalRequest._retry &&
-            !isPublicRoute // ✅ Ne pas tenter de refresh sur les routes publiques
+            !isPublicRoute // Ne pas tenter de refresh sur les routes publiques
         ) {
             if (isRefreshing) {
                 return new Promise(function (resolve, reject) {
@@ -79,7 +79,7 @@ api.interceptors.response.use(
                 const { accessToken } = data;
 
                 localStorage.setItem('accessToken', accessToken);
-                originalRequest.headers['Authorization'] = 'Bearer ' + accessToken; // ✅ Décommenté
+                originalRequest.headers['Authorization'] = 'Bearer ' + accessToken; 
 
                 processQueue(null, accessToken);
                 return api(originalRequest);
